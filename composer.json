@@ -42,7 +42,8 @@
     },
     "extra": {
         "symfony-app-dir": "app",
-        "symfony-web-dir": "web"
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink"
     },
     "repositories": [
         {
@@ -57,6 +58,7 @@
                 }
             }
         }
-    ]
+    ],
+    "minimum-stability": "dev"
 
 }
