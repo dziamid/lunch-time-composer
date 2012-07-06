@@ -23,7 +23,11 @@
         "knockout/knockout-js": "2.1.0",
         "jms/serializer-bundle": "dev-master",
         "doctrine/data-fixtures": "dev-master",
-        "doctrine/doctrine-fixtures-bundle": "dev-master"
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "twitter/bootstrap": "2.0.4",
+        "jquery/jquery": "1.7.2",
+        "datejs/datejs": "dev-master",
+        "gedmo/doctrine-extensions": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
@@ -35,6 +39,12 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"
+        ],
+        "post-package-install": [
+            "LunchTime\\ComposerHooks::buildJavascripts"
+        ],
+        "post-package-update": [
+            "LunchTime\\ComposerHooks::buildJavascripts"
         ]
     },
     "config": {
@@ -50,11 +60,59 @@
             "type": "package",
             "package": {
                 "name": "knockout/knockout-js",
+                "version": "master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/SteveSanderson/knockout.git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "knockout/knockout-js",
                 "version": "2.1.0",
                 "source": {
                     "type": "git",
                     "url": "https://github.com/SteveSanderson/knockout.git",
                     "reference": "v2.1.0"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "twitter/bootstrap",
+                "version": "2.0.4",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/twitter/bootstrap.git",
+                    "reference": "v2.0.4"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "jquery/jquery",
+                "version": "1.7.2",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/jquery/jquery.git",
+                    "reference": "1.7.2"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "datejs/datejs",
+                "version": "master",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/datejs/Datejs.git",
+                    "reference": "master"
                 }
             }
         }
