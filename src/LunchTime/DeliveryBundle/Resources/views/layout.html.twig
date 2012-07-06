@@ -1,15 +1,17 @@
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
-{{ parent() }}
-<link rel="stylesheet" href="{{ asset('bundles/ltdelivery/css/style.css') }}" type="text/css"/>
-<link rel="stylesheet" href="{{ asset('bundles/ltdelivery/css/app.css') }}" type="text/css"/>
+    {{ parent() }}
+    {% stylesheets
+        '@LTDeliveryBundle/Resources/public/css/style.css'
+        '@LTDeliveryBundle/Resources/public/css/app.css'
+     %}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+    {% endstylesheets %}
 {% endblock %}
 
 {% block javascripts %}
-
     {{ parent() }}
-
     {% javascripts
         '@LTDeliveryBundle/Resources/public/js/menu.js'
         '@LTDeliveryBundle/Resources/public/js/menu-item.js'
@@ -19,6 +21,5 @@
      %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-
 {% endblock %}
 
