@@ -13,36 +13,46 @@
 {% block body %}
 
 
-<div class="calendar">
-    <h3>Calendar</h3>
-    <ul class="items clearfix" data-bind="foreach: menus">
-        <li class="item clickable" data-bind="click: $root.activateMenu, css: {active: $root.isActiveMenu($data)}">
-            <span data-bind="text: title"></span>
-        </li>
-    </ul>
+<div class="row-fluid">
+    <div class="span12">
+        <h3>Calendar</h3>
+        <ul class="nav nav-pills" data-bind="foreach: menus">
+            <li data-bind="click: $root.activateMenu, css: {active: $root.isActiveMenu($data)}">
+                <a href="#" data-bind="text: title"></a>
+            </li>
+        </ul>
+    </div>
 </div>
 
 
-<div class="columns clearfix">
-    <div class="active-menu" data-bind="with: activeMenu">
+<div class="row-fluid">
+    <div class="span6" data-bind="with: activeMenu">
         <h3>Menu for <span data-bind="text: title"></span></h3>
 
-        <ul class="items" data-bind="foreach: items">
-            <li class="item clickable" data-bind="click: $root.addToActiveOrder">
-                <span class="title" data-bind="text: title"></span>
-                <span data-bind="text: price"></span>
+        <ul class="nav nav-pills nav-stacked" data-bind="foreach: items">
+            <li data-bind="click: $root.addToActiveOrder">
+                <a href="#">
+                    <span data-bind="text: title"></span>
+                    <span class="pull-right" data-bind="text: price"></span>
+                </a>
             </li>
         </ul>
     </div>
 
-    <div class="active-order" data-bind="with: activeOrder">
+    <div class="span6" data-bind="with: activeOrder">
         <h3>Your order for <span data-bind="text: title"></span></h3>
-        <ul class="items" data-bind="foreach: activeItems">
-            <li class="item">
-                <span class="title" data-bind="text: title"></span>
-                <span data-bind="text: amount"></span>
-                <span class="clickable" data-bind="click: $root.removeFromOrder">-1</span>
-                <span class="clickable" data-bind="click: $data.addOne">+1</span>
+        <ul class="nav nav-pills nav-stacked" data-bind="foreach: activeItems">
+            <li>
+                <a href="#" class="title">
+                    <span data-bind="text: title"></span>
+
+                    <span class="pull-right">
+                        <span class="" data-bind="text: amount"></span>
+                        <span class="" data-bind="click: $root.removeFromOrder">-1</span>
+                        <span class="" data-bind="click: $data.addOne">+1</span>
+
+                    </span>
+                </a>
             </li>
         </ul>
         <div class="total">
