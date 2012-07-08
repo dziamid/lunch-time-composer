@@ -52,10 +52,11 @@ LT.viewModel = new (function (config) {
         self.activeOrder().removeItem(item);
     };
 
-    self.submitOrder = function () {
+    self.submitOrder = function (data, event) {
+        var btn = $(event.target);
+
         var orderData = ko.toJSON(self.activeOrder());
         console.log(orderData);
-
 
         $.ajax({
             url: config.orderBaseUrl,
@@ -67,13 +68,14 @@ LT.viewModel = new (function (config) {
                     var order = new LT.Order(data.order);
                     self.activeOrder(order);
                 }
-            }
+            },
+            beforeSend: function () { btn.button('loading')},
+            complete: function () { btn.button('reset')}
         });
     };
 
     //initial data
     self.activateMenu(self.menus()[self.menus().length - 1]);
-    //self.activeOrder(new LT.Order({date: '2012-05-06'}));
 
 })(LT.config);
 

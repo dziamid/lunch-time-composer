@@ -12,10 +12,8 @@
 
 {% block body %}
 
-
 <div class="row-fluid">
-    <div class="span12">
-        <h3>Calendar</h3>
+    <div class="span12" style="text-align: center">
         <ul class="nav nav-pills" data-bind="foreach: menus">
             <li data-bind="click: $root.activateMenu, css: {active: $root.isActiveMenu($data)}">
                 <a href="#" data-bind="text: title"></a>
@@ -24,43 +22,49 @@
     </div>
 </div>
 
-
 <div class="row-fluid">
     <div class="span6" data-bind="with: activeMenu">
-        <h3>Menu for <span data-bind="text: title"></span></h3>
-
-        <ul class="nav nav-pills nav-stacked" data-bind="foreach: items">
-            <li data-bind="click: $root.addToActiveOrder">
-                <a href="#">
-                    <span data-bind="text: title"></span>
-                    <span class="pull-right" data-bind="text: price"></span>
-                </a>
-            </li>
-        </ul>
+        <div class="well" style="padding: 8px 0">
+            <ul class="nav nav-list">
+                <li class="nav-header">Menu for <span data-bind="text: title"></span></li>
+                <!-- ko foreach: items -->
+                <li data-bind="click: $root.addToActiveOrder">
+                    <a href="#">
+                        <span data-bind="text: title"></span>
+                        <span class="pull-right" data-bind="text: price"></span>
+                    </a>
+                </li>
+                <!-- /ko -->
+            </ul>
+        </div>
     </div>
 
-    <div class="span6" data-bind="with: activeOrder">
-        <h3>Your order for <span data-bind="text: title"></span></h3>
-        <ul class="nav nav-pills nav-stacked" data-bind="foreach: activeItems">
-            <li>
-                <a href="#" class="title">
-                    <span data-bind="text: title"></span>
+    <div class="span6">
+        <div class="well" style="padding: 8px 0" data-bind="with: activeOrder">
+            <ul class="nav nav-list">
+                <li class="nav-header">Your order for <span data-bind="text: title"></span></li>
+                <!-- ko foreach: activeItems -->
+                <li>
+                    <a href="#">
+                        <span data-bind="text: title"></span>
 
-                    <span class="pull-right">
-                        <span class="" data-bind="text: amount"></span>
-                        <span class="" data-bind="click: $root.removeFromOrder">-1</span>
-                        <span class="" data-bind="click: $data.addOne">+1</span>
+                        <span class="pull-right">
+                            <span data-bind="text: amount"></span>
+                            <span data-bind="click: $root.removeFromOrder">-1</span>
+                            <span data-bind="click: $data.addOne">+1</span>
+                        </span>
+                    </a>
+                </li>
+                <!-- /ko -->
+            </ul>
+            <div style="padding: 8px 19px">
+                <button class="btn" data-loading-text="saving..." data-bind="click: $root.submitOrder" autocomplete="off">Submit your order</button>
+                Total: <span data-bind="text: totalPrice"></span>
+            </div>
 
-                    </span>
-                </a>
-            </li>
-        </ul>
-        <div class="total">
-            Total: <span data-bind="text: totalPrice"></span>
         </div>
-        <button data-bind="click: $root.submitOrder">Submit your order</button>
+
     </div>
 </div>
-
 
 {% endblock %}
