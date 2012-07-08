@@ -33,15 +33,15 @@ class MenuCategoryFixtures extends AbstractFixture implements FixtureInterface, 
         $manager->persist($cat);
         $this->addReference('pizza', $cat);
 
-//        $cat = new Category();
-//        $cat->setTitle('Большие');
-//        $cat->setParent($this->getReference('pizza'));
-//        $manager->persist($cat);
-//
-//        $cat = new Category();
-//        $cat->setTitle('Маленькие');
-//        $cat->setParent($this->getReference('pizza'));
-//        $manager->persist($cat);
+        $cat = new Category();
+        $cat->setTitle('Большие');
+        $cat->setParent($this->getReference('pizza'));
+        $manager->persist($cat);
+
+        $cat = new Category();
+        $cat->setTitle('Маленькие');
+        $cat->setParent($this->getReference('pizza'));
+        $manager->persist($cat);
 
         $manager->flush();
     }

@@ -27,7 +27,7 @@
         "twitter/bootstrap": "2.0.4",
         "jquery/jquery": "1.7.2",
         "datejs/datejs": "dev-master",
-        "gedmo/doctrine-extensions": "dev-master"
+        "stof/doctrine-extensions-bundle":"dev-master"
     },
     "scripts": {
         "post-install-cmd": [
