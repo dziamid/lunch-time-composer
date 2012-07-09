@@ -10,17 +10,32 @@ LT.Menu = function (data) {
     //date is required
     self.date = ko.observable(Date.parse(data.date));
 
-    //categories are populates from items that menu has
-    self.categories = ko.observableArray([]);
+    // add all categories that this menu has to common repository
     for (var i = 0; i < data.items.length; i++) {
         var cat = LT.MenuCategoryRepository.create(data.items[i].category);
-            self.categories.pushUnique(cat);
     }
 
     self.items = ko.observableArray([]);
     for (var i = 0; i < data.items.length; i++) {
         self.items.push(LT.MenuItemRepository.create(data.items[i]));
     }
+
+    //categories are populates from items that menu has
+    self.categories = ko.computed(function () {
+        var cats = ko.utils.arrayMap(self.items(), function (item) {
+            return item.category();
+        });
+
+        return ko.utils.arrayGetDistinctValues(cats);
+    });
+
+    self.getItemsForCategory = function (cat) {
+        return ko.utils.arrayFilter(self.items(), function (item) {
+            return item.category() === cat;
+        });
+    };
+
+
     self.title = ko.computed(function () {
         return self.date().toString('MMMM d');
     });

@@ -29,7 +29,7 @@
                 <li class="nav-header">Menu for <span data-bind="text: title"></span></li>
                 <!-- ko foreach: categories -->
                     <li class="nav-header"><span data-bind="text: title"></span></li>
-                    <!-- ko foreach: $data.items -->
+                    <!-- ko foreach: $parent.getItemsForCategory($data) -->
                     <li data-bind="click: $root.addToActiveOrder">
                         <a href="#">
                             <span data-bind="text: title"></span>
