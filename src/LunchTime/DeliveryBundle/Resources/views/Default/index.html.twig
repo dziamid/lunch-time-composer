@@ -46,18 +46,21 @@
         <div class="well" style="padding: 8px 0" data-bind="with: activeOrder">
             <ul class="nav nav-list">
                 <li class="nav-header">Your order for <span data-bind="text: title"></span></li>
-                <!-- ko foreach: activeItems -->
-                <li>
-                    <a href="#">
-                        <span data-bind="text: title"></span>
+                <!-- ko foreach: activeCategories -->
+                    <li class="nav-header"><span data-bind="text: title"></span></li>
+                    <!-- ko foreach: $parent.getActiveItemsForCategory($data) -->
+                    <li>
+                        <a href="#">
+                            <span data-bind="text: title"></span>
 
-                        <span class="pull-right">
-                            <span data-bind="text: amount"></span>
-                            <span data-bind="click: $root.removeFromOrder">-1</span>
-                            <span data-bind="click: $data.addOne">+1</span>
-                        </span>
-                    </a>
-                </li>
+                            <span class="pull-right">
+                                <span data-bind="text: amount"></span>
+                                <span data-bind="click: $root.removeFromOrder">-1</span>
+                                <span data-bind="click: $data.addOne">+1</span>
+                            </span>
+                        </a>
+                    </li>
+                    <!-- /ko -->
                 <!-- /ko -->
             </ul>
             <div style="padding: 8px 19px">

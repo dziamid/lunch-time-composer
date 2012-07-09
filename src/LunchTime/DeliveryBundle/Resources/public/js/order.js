@@ -24,6 +24,20 @@ LT.Order = function (data) {
 
     });
 
+    self.activeCategories = ko.computed(function () {
+        var cats = ko.utils.arrayMap(self.activeItems(), function (item) {
+            return item.menuItem().category();
+        });
+
+        return ko.utils.arrayGetDistinctValues(cats);
+    });
+
+    self.getActiveItemsForCategory = function (cat) {
+        return ko.utils.arrayFilter(self.activeItems(), function (item) {
+            return item.menuItem().category() === cat;
+        });
+    };
+
     self.totalPrice = ko.computed(function () {
         var total = 0;
 
