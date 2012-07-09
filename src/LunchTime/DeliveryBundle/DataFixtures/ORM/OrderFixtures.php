@@ -24,7 +24,7 @@ class OrderFixtures extends AbstractFixture implements FixtureInterface, Ordered
 
     public function getOrder()
     {
-        return 3;
+        return 4;
     }
 
 }

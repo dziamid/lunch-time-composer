@@ -4,6 +4,7 @@ namespace LunchTime\DeliveryBundle\Entity\Menu;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\SerializerBundle\Annotation as Serializer;
+use Symfony\Component\DependencyInjection\Container;
 
 /**
  * LunchTime\DeliveryBundle\Entity\Menu\Item
@@ -41,6 +42,11 @@ class Item
      * @ORM\Column(name="price", type="float")
      */
     private $price;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\LunchTime\DeliveryBundle\Entity\Menu\Category", inversedBy="items")
+     */
+    private $category;
 
     public function __toString()
     {
@@ -115,5 +121,25 @@ class Item
     public function getPrice()
     {
         return $this->price;
+    }
+
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function fromArray($data)
+    {
+        foreach ($data as $field => $value) {
+            $setter = 'set'.Container::camelize($field);
+            if (method_exists($this, 'get'.Container::camelize($field))) {
+                $this->$setter($value);
+            }
+        }
     }
 }

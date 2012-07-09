@@ -4,6 +4,9 @@ namespace LunchTime\DeliveryBundle\Entity\Menu;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
+use JMS\SerializerBundle\Annotation as Serializer;
+
 
 /**
  * LunchTime\DeliveryBundle\Entity\Menu\Category
@@ -31,30 +34,41 @@ class Category
     private $title;
 
     /**
+     * @Serializer\Exclude
+     * @ORM\OneToMany(targetEntity="\LunchTime\DeliveryBundle\Entity\Menu\Item", mappedBy="category")
+     */
+    private $items;
+
+    /**
+     * @Serializer\Exclude
      * @Gedmo\TreeLeft
      * @ORM\Column(name="lft", type="integer")
      */
     private $lft;
 
     /**
+     * @Serializer\Exclude
      * @Gedmo\TreeLevel
      * @ORM\Column(name="lvl", type="integer")
      */
     private $lvl;
 
     /**
+     * @Serializer\Exclude
      * @Gedmo\TreeRight
      * @ORM\Column(name="rgt", type="integer")
      */
     private $rgt;
 
     /**
+     * @Serializer\Exclude
      * @Gedmo\TreeRoot
      * @ORM\Column(name="root", type="integer", nullable=true)
      */
     private $root;
 
     /**
+     * @Serializer\Exclude
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
@@ -62,12 +76,17 @@ class Category
     private $parent;
 
     /**
+     * @Serializer\Exclude
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     private $children;
 
-
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+        $this->children = new ArrayCollection();
+    }
     /**
      * Get id
      *
@@ -98,7 +117,7 @@ class Category
         return $this->title;
     }
 
-    public function setChildren($children)
+    public function setChildren(ArrayCollection $children)
     {
         $this->children = $children;
     }
@@ -108,7 +127,12 @@ class Category
         return $this->children;
     }
 
-    public function setParent($parent)
+    public function addChild(Category $category)
+    {
+        $this->children[] = $category;
+    }
+
+    public function setParent(Category $parent)
     {
         $this->parent = $parent;
     }
@@ -156,5 +180,15 @@ class Category
     public function getRoot()
     {
         return $this->root;
+    }
+
+    public function addItem(Item $item)
+    {
+        $this->items[] = $item;
+    }
+
+    public function getItems()
+    {
+        return $this->items;
     }
 }

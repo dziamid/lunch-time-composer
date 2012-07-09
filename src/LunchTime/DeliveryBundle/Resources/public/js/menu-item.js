@@ -9,6 +9,11 @@ LT.MenuItem = function (data) {
     //price is required
     self.price = ko.observable(parseFloat(data.price));
 
+    var category = LT.MenuCategoryRepository.find(data.category.id);
+    category.items.push(self);
+
+    self.category = ko.observable(category);
+
     self.toJSON = function () {
         var obj = ko.toJS(this);
 

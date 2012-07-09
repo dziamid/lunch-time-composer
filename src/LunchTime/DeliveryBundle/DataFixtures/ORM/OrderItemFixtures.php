@@ -17,20 +17,14 @@ class OrderItemFixtures extends AbstractFixture implements FixtureInterface, Ord
 
         $item = new Item();
         $item->setOrder($order);
-        $item->setMenuItem($this->getReference('menu-item-3'));
+        $item->setMenuItem($this->getReference('menu-item-soup'));
         $item->setAmount(1);
         $manager->persist($item);
 
         $item = new Item();
         $item->setOrder($order);
-        $item->setMenuItem($this->getReference('menu-item-2'));
+        $item->setMenuItem($this->getReference('menu-item-salad'));
         $item->setAmount(2);
-        $manager->persist($item);
-
-        $item = new Item();
-        $item->setOrder($order);
-        $item->setMenuItem($this->getReference('menu-item-1'));
-        $item->setAmount(3);
         $manager->persist($item);
 
         $manager->flush();
@@ -38,7 +32,7 @@ class OrderItemFixtures extends AbstractFixture implements FixtureInterface, Ord
 
     public function getOrder()
     {
-        return 4;
+        return 5;
     }
 
 }

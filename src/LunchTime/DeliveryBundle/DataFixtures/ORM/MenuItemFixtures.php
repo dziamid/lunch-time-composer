@@ -11,52 +11,86 @@ class MenuItemFixtures extends AbstractFixture implements FixtureInterface, Orde
 {
     public function load(ObjectManager $manager)
     {
-        //MENU1
         $menu1 = $this->getReference('menu-1');
+        $salad = $this->getReference('salad');
+        $soup = $this->getReference('soup');
+        $main = $this->getReference('main');
+        $pizza = $this->getReference('pizza');
+
+        //soups
+        $item = new Item();
+        $item->fromArray(array(
+            'title' => 'Борщ',
+            'price' => 10500,
+            'menu' => $menu1,
+            'category' => $soup,
+        ));
+        $manager->persist($item);
+        $this->addReference('menu-item-soup', $item);
 
         $item = new Item();
-        $item->setTitle('Борщ');
-        $item->setPrice(10500);
-        $item->setMenu($menu1);
+        $item->fromArray(array(
+            'title' => 'Куриный суп с рисом',
+            'price' => 12500,
+            'menu' => $menu1,
+            'category' => $soup,
+        ));
         $manager->persist($item);
-        $this->addReference('menu-item-1', $item);
 
         $item = new Item();
-        $item->setTitle('Щи');
-        $item->setPrice(8500);
-        $item->setMenu($menu1);
+        $item->fromArray(array(
+            'title' => 'Щавель',
+            'price' => 11300,
+            'menu' => $menu1,
+            'category' => $soup,
+        ));
         $manager->persist($item);
-        $this->addReference('menu-item-2', $item);
+
+        //salads
+        $item = new Item();
+        $item->fromArray(array(
+            'title' => 'Из риса с крабавыми палочками',
+            'price' => 8300,
+            'menu' => $menu1,
+            'category' => $salad,
+        ));
+        $manager->persist($item);
+        $this->addReference('menu-item-salad', $item);
 
         $item = new Item();
-        $item->setTitle('Рот полощи');
-        $item->setPrice(20850);
-        $item->setMenu($menu1);
+        $item->fromArray(array(
+            'title' => 'Из курицы с огурцом',
+            'price' => 9300,
+            'menu' => $menu1,
+            'category' => $salad,
+        ));
         $manager->persist($item);
-        $this->addReference('menu-item-3', $item);
 
-        //MENU2
-        $menu2 = $this->getReference('menu-2');
+        //main
         $item = new Item();
-        $item->setTitle('Салат');
-        $item->setPrice(13000);
-        $item->setMenu($menu2);
+        $item->fromArray(array(
+            'title' => 'Говядина "Пикантная"',
+            'price' => 29350,
+            'menu' => $menu1,
+            'category' => $main,
+        ));
         $manager->persist($item);
-        $this->addReference('menu-item-4', $item);
 
         $item = new Item();
-        $item->setTitle('Куй звезда');
-        $item->setPrice(11000);
-        $item->setMenu($menu2);
+        $item->fromArray(array(
+            'title' => 'Бефстроганов из телятины',
+            'price' => 31500,
+            'menu' => $menu1,
+            'category' => $main,
+        ));
         $manager->persist($item);
-        $this->addReference('menu-item-5', $item);
 
         $manager->flush();
     }
 
     public function getOrder()
     {
-        return 2;
+        return 3;
     }
 
 }

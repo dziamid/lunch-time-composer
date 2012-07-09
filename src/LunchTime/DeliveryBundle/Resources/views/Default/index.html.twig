@@ -27,13 +27,16 @@
         <div class="well" style="padding: 8px 0">
             <ul class="nav nav-list">
                 <li class="nav-header">Menu for <span data-bind="text: title"></span></li>
-                <!-- ko foreach: items -->
-                <li data-bind="click: $root.addToActiveOrder">
-                    <a href="#">
-                        <span data-bind="text: title"></span>
-                        <span class="pull-right" data-bind="text: price"></span>
-                    </a>
-                </li>
+                <!-- ko foreach: categories -->
+                    <li class="nav-header"><span data-bind="text: title"></span></li>
+                    <!-- ko foreach: $data.items -->
+                    <li data-bind="click: $root.addToActiveOrder">
+                        <a href="#">
+                            <span data-bind="text: title"></span>
+                            <span class="pull-right" data-bind="text: price"></span>
+                        </a>
+                    </li>
+                    <!-- /ko -->
                 <!-- /ko -->
             </ul>
         </div>
