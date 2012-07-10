@@ -32,9 +32,9 @@ class Item
 
     /**
      * @Serializer\Exclude
-     * @ORM\ManyToOne(targetEntity="\LunchTime\DeliveryBundle\Entity\Menu", inversedBy="items")
+     * @ORM\ManyToMany(targetEntity="\LunchTime\DeliveryBundle\Entity\Menu", inversedBy="items")
      */
-    private $menu;
+    private $menus;
 
     /**
      * @var float $price
@@ -83,25 +83,6 @@ class Item
         return $this->title;
     }
 
-    /**
-     * Set menu
-     *
-     * @param LunchTime\DeliveryBundle\Entity\Menu $menu
-     */
-    public function setMenu(\LunchTime\DeliveryBundle\Entity\Menu $menu)
-    {
-        $this->menu = $menu;
-    }
-
-    /**
-     * Get menu
-     *
-     * @return LunchTime\DeliveryBundle\Entity\Menu 
-     */
-    public function getMenu()
-    {
-        return $this->menu;
-    }
 
     /**
      * Set price
@@ -142,4 +123,15 @@ class Item
             }
         }
     }
+
+    public function addMenu(\LunchTime\DeliveryBundle\Entity\Menu $menu)
+    {
+        $this->menus[] = $menu;
+    }
+
+    public function getMenus()
+    {
+        return $this->menus;
+    }
+
 }

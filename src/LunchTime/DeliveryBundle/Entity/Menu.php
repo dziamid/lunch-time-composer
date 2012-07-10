@@ -31,7 +31,7 @@ class Menu
     private $due_date;
 
     /**
-     * @ORM\OneToMany(targetEntity="\LunchTime\DeliveryBundle\Entity\Menu\Item", mappedBy="menu")
+     * @ORM\ManyToMany(targetEntity="\LunchTime\DeliveryBundle\Entity\Menu\Item", mappedBy="menus")
      */
     private $items;
     /**
@@ -78,9 +78,10 @@ class Menu
      *
      * @param LunchTime\DeliveryBundle\Entity\Menu\Item $items
      */
-    public function addItem(\LunchTime\DeliveryBundle\Entity\Menu\Item $items)
+    public function addItem(\LunchTime\DeliveryBundle\Entity\Menu\Item $item)
     {
-        $this->items[] = $items;
+        $item->addMenu($this);
+        $this->items[] = $item;
     }
 
     /**
