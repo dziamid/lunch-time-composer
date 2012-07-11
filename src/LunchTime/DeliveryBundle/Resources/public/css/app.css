@@ -1,3 +1,13 @@
+.lt-action {
+    /*font-weight: bold;*/
+}
 
+.lt-action:hover {
+    background: white;
+}
+
+.lt-controls > span {
+    padding: 0 8px;
+}
 
 

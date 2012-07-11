@@ -24,7 +24,7 @@
 
 <div class="row-fluid">
     <div class="span6" data-bind="with: activeMenu">
-        <div class="well" style="padding: 8px 0">
+        <div class="well lt-list" style="padding: 8px 0">
             <ul class="nav nav-list">
                 <li class="nav-header">Menu for <span data-bind="text: title"></span></li>
                 <!-- ko foreach: categories -->
@@ -33,7 +33,7 @@
                     <li data-bind="click: $root.addToActiveOrder">
                         <a href="#">
                             <span data-bind="text: title"></span>
-                            <span class="pull-right" data-bind="text: price"></span>
+                            <span class="pull-right lt-controls" data-bind="text: price"></span>
                         </a>
                     </li>
                     <!-- /ko -->
@@ -43,7 +43,7 @@
     </div>
 
     <div class="span6">
-        <div class="well" style="padding: 8px 0" data-bind="with: activeOrder">
+        <div class="well lt-list" style="padding: 8px 0" data-bind="with: activeOrder">
             <ul class="nav nav-list">
                 <li class="nav-header">Your order for <span data-bind="text: title"></span></li>
                 <!-- ko foreach: activeCategories -->
@@ -53,10 +53,11 @@
                         <a href="#">
                             <span data-bind="text: title"></span>
 
-                            <span class="pull-right">
+                            <span class="pull-right lt-controls">
+                                <span class="lt-action" data-bind="click: $root.removeFromOrder">-1</span>
+                                <span class="lt-action" data-bind="click: $data.addOne">+1</span>
                                 <span data-bind="text: amount"></span>
-                                <span data-bind="click: $root.removeFromOrder">-1</span>
-                                <span data-bind="click: $data.addOne">+1</span>
+                                <span data-bind="text: price"></span>
                             </span>
                         </a>
                     </li>
