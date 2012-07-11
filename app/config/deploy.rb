@@ -19,6 +19,7 @@ default_run_options[:pty] = true
 logger.level = Logger::MAX_LEVEL
 
 set :shared_children, [web_path + "/uploads", "vendor"]
+set :shared_files,    ["app/config/parameters.yml"]
 set :update_vendors, false
 set :use_composer, true
 set :vendors_mode, "install"
