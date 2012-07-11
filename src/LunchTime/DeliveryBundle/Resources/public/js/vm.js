@@ -12,6 +12,12 @@ LT.viewModel = new (function (config) {
         self.menus.push(new LT.Menu(config.menus[i]));
     }
 
+    self.findMenu = function(menuId) {
+        return ko.utils.arrayFirst(self.menus(), function (menu) {
+            return ko.utils.unwrapObservable(menu.id) == menuId;
+        });
+    };
+
     self.orders = ko.observableArray([]);
     config.orders = config.orders || [];
     for (i = 0; i < config.orders.length; i++) {
@@ -19,6 +25,10 @@ LT.viewModel = new (function (config) {
     }
 
     self.activeMenu = ko.observable(null);
+    self.activeMenu.subscribe(function (menu) {
+        $.cookie('selected-menu-id', ko.utils.unwrapObservable(menu.id), { expires: 30*12 });
+        //TODO: move activateMenu logic here
+    });
     self.activeOrder = ko.observable(null);
 
     self.activateMenu = function (menu) {
@@ -36,7 +46,7 @@ LT.viewModel = new (function (config) {
     self.activeOrder = ko.observable(null);
 
     self.isActiveMenu = function (menu) {
-        return menu == self.activeMenu();
+        return menu === self.activeMenu();
     };
 
     /**
@@ -75,7 +85,13 @@ LT.viewModel = new (function (config) {
     };
 
     //initial data
-    self.activateMenu(self.menus()[self.menus().length - 1]);
+    var menuId, menu;
+    if ((menuId = $.cookie('selected-menu-id')) && (menu = self.findMenu(menuId))) {
+        self.activateMenu(menu);
+    } else {
+        self.activateMenu(self.menus()[self.menus().length - 1]);
+    }
+
 
 })(LT.config);
 
