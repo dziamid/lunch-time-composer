@@ -1,11 +1,13 @@
 <?php
 
 use Behat\Behat\Context\ClosuredContextInterface,
-    Behat\Behat\Context\TranslatedContextInterface,
-    Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
+Behat\Behat\Context\TranslatedContextInterface,
+Behat\Behat\Context\BehatContext,
+Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode;
+Behat\Gherkin\Node\TableNode;
+
+use Behat\MinkExtension\Context\MinkContext;
 
 //
 // Require 3rd-party libraries here:
@@ -17,7 +19,7 @@ use Behat\Gherkin\Node\PyStringNode,
 /**
  * Features context.
  */
-class FeatureContext extends BehatContext
+class FeatureContext extends MinkContext
 {
     /**
      * Initializes context.
@@ -28,29 +30,26 @@ class FeatureContext extends BehatContext
     public function __construct(array $parameters)
     {
         // Initialize your context here
+
     }
 
-    /**
-     * @Given /^I am on a home page$/
-     */
-    public function iAmOnAHomePage()
-    {
-        throw new PendingException();
-    }
+//
+// Place your definition and hook methods here:
+//
+//    /**
+//     * @Given /^I have done something with "([^"]*)"$/
+//     */
+//    public function iHaveDoneSomethingWith($argument)
+//    {
+//        doSomethingWith($argument);
+//    }
+//
 
     /**
-     * @When /^I click "([^"]*)"$/
+     * @Given /^I wait for menu to load$/
      */
-    public function iClick($arg1)
+    public function iWaitForMenuToLoad()
     {
-        throw new PendingException();
-    }
-
-    /**
-     * @Then /^I should see "([^"]*)"$/
-     */
-    public function iShouldSee($arg1)
-    {
-        throw new PendingException();
+        $this->getSession()->wait(2000, "$('#active-menu').children().length > 0");
     }
 }

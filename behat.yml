@@ -1,0 +1,18 @@
+default:
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url: http://lunch-time/app_dev.php
+      goutte: ~
+      selenium2: ~
+
+  paths:
+    features:  features
+    bootstrap: features/bootstrap
+
+annotations:
+  paths:
+    features: features/annotations
+
+closures:
+  paths:
+    features: features/closures

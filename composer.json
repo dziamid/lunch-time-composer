@@ -1,6 +1,7 @@
 {
     "name":"symfony/framework-standard-edition",
     "description":"The \"Symfony Standard Edition\" distribution",
+    "minimum-stability":"dev",
     "autoload":{
         "psr-0":{
             "":"src/"
@@ -29,11 +30,10 @@
         "datejs/datejs":"dev-master",
         "jquery/cookie":"dev-master",
         "stof/doctrine-extensions-bundle":"dev-master",
-        "behat/behat":"2.4.*@stable",
-        "behat/mink":"1.4.*@stable",
+        "behat/behat":"*",
+        "behat/mink":"*",
         "behat/mink-extension":"*",
-        "behat/mink-goutte-driver":"*",
-        "behat/mink-selenium2-driver":"*"
+        "behat/mink-goutte-driver":"*"
 
     },
     "scripts":{
@@ -136,7 +136,5 @@
             }
         }
 
-    ],
-    "minimum-stability":"dev"
-
+    ]
 }
