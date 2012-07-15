@@ -1,136 +1,142 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "description": "The \"Symfony Standard Edition\" distribution",
-    "autoload": {
-        "psr-0": {
-            "": "src/"
+    "name":"symfony/framework-standard-edition",
+    "description":"The \"Symfony Standard Edition\" distribution",
+    "autoload":{
+        "psr-0":{
+            "":"src/"
         }
     },
-    "require": {
-        "php": ">=5.3.3",
-        "symfony/symfony": "2.1.*",
-        "doctrine/orm": "2.2.*",
-        "doctrine/doctrine-bundle": "dev-master",
-        "twig/extensions": "dev-master",
-        "symfony/assetic-bundle": "dev-master",
-        "symfony/swiftmailer-bundle": "dev-master",
-        "symfony/monolog-bundle": "dev-master",
-        "sensio/distribution-bundle": "dev-master",
-        "sensio/framework-extra-bundle": "dev-master",
-        "sensio/generator-bundle": "dev-master",
-        "jms/security-extra-bundle": "1.1.*",
-        "jms/di-extra-bundle": "1.0.*",
-        "knockout/knockout-js": "2.1.0",
-        "jms/serializer-bundle": "dev-master",
-        "doctrine/data-fixtures": "dev-master",
-        "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "twitter/bootstrap": "2.0.4",
-        "jquery/jquery": "1.7.2",
-        "datejs/datejs": "dev-master",
-        "jquery/cookie": "dev-master",
-        "stof/doctrine-extensions-bundle": "dev-master"
+    "require":{
+        "php":">=5.3.3",
+        "symfony/symfony":"2.1.*",
+        "doctrine/orm":"2.2.*",
+        "doctrine/doctrine-bundle":"dev-master",
+        "twig/extensions":"dev-master",
+        "symfony/assetic-bundle":"dev-master",
+        "symfony/swiftmailer-bundle":"dev-master",
+        "symfony/monolog-bundle":"dev-master",
+        "sensio/distribution-bundle":"dev-master",
+        "sensio/framework-extra-bundle":"dev-master",
+        "sensio/generator-bundle":"dev-master",
+        "jms/security-extra-bundle":"1.1.*",
+        "jms/di-extra-bundle":"1.0.*",
+        "knockout/knockout-js":"2.1.0",
+        "jms/serializer-bundle":"dev-master",
+        "doctrine/data-fixtures":"dev-master",
+        "doctrine/doctrine-fixtures-bundle":"dev-master",
+        "twitter/bootstrap":"2.0.4",
+        "jquery/jquery":"1.7.2",
+        "datejs/datejs":"dev-master",
+        "jquery/cookie":"dev-master",
+        "stof/doctrine-extensions-bundle":"dev-master",
+        "behat/behat":"2.4.*@stable",
+        "behat/mink":"1.4.*@stable",
+        "behat/mink-extension":"*",
+        "behat/mink-goutte-driver":"*",
+        "behat/mink-selenium2-driver":"*"
+
     },
-    "scripts": {
-        "post-install-cmd": [
+    "scripts":{
+        "post-install-cmd":[
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"
         ],
-        "post-update-cmd": [
+        "post-update-cmd":[
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets"
         ],
-        "post-package-install": [
+        "post-package-install":[
             "LunchTime\\ComposerHooks::buildJavascripts"
         ],
-        "post-package-update": [
+        "post-package-update":[
             "LunchTime\\ComposerHooks::buildJavascripts"
         ]
     },
-    "config": {
-        "bin-dir": "bin"
+    "config":{
+        "bin-dir":"bin"
     },
-    "extra": {
-        "symfony-app-dir": "app",
-        "symfony-web-dir": "web",
-        "symfony-assets-install": "symlink"
+    "extra":{
+        "symfony-app-dir":"app",
+        "symfony-web-dir":"web",
+        "symfony-assets-install":"symlink"
     },
-    "repositories": [
+    "repositories":[
         {
-            "type": "package",
-            "package": {
-                "name": "knockout/knockout-js",
-                "version": "master",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/SteveSanderson/knockout.git",
-                    "reference": "master"
+            "type":"package",
+            "package":{
+                "name":"knockout/knockout-js",
+                "version":"master",
+                "source":{
+                    "type":"git",
+                    "url":"https://github.com/SteveSanderson/knockout.git",
+                    "reference":"master"
                 }
             }
         },
         {
-            "type": "package",
-            "package": {
-                "name": "knockout/knockout-js",
-                "version": "2.1.0",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/SteveSanderson/knockout.git",
-                    "reference": "v2.1.0"
+            "type":"package",
+            "package":{
+                "name":"knockout/knockout-js",
+                "version":"2.1.0",
+                "source":{
+                    "type":"git",
+                    "url":"https://github.com/SteveSanderson/knockout.git",
+                    "reference":"v2.1.0"
                 }
             }
         },
         {
-            "type": "package",
-            "package": {
-                "name": "twitter/bootstrap",
-                "version": "2.0.4",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/twitter/bootstrap.git",
-                    "reference": "v2.0.4"
+            "type":"package",
+            "package":{
+                "name":"twitter/bootstrap",
+                "version":"2.0.4",
+                "source":{
+                    "type":"git",
+                    "url":"https://github.com/twitter/bootstrap.git",
+                    "reference":"v2.0.4"
                 }
             }
         },
         {
-            "type": "package",
-            "package": {
-                "name": "jquery/jquery",
-                "version": "1.7.2",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/jquery/jquery.git",
-                    "reference": "1.7.2"
+            "type":"package",
+            "package":{
+                "name":"jquery/jquery",
+                "version":"1.7.2",
+                "source":{
+                    "type":"git",
+                    "url":"https://github.com/jquery/jquery.git",
+                    "reference":"1.7.2"
                 }
             }
         },
         {
-            "type": "package",
-            "package": {
-                "name": "datejs/datejs",
-                "version": "master",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/datejs/Datejs.git",
-                    "reference": "master"
+            "type":"package",
+            "package":{
+                "name":"datejs/datejs",
+                "version":"master",
+                "source":{
+                    "type":"git",
+                    "url":"https://github.com/datejs/Datejs.git",
+                    "reference":"master"
                 }
             }
         },
         {
-            "type": "package",
-            "package": {
-                "name": "jquery/cookie",
-                "version": "master",
-                "source": {
-                    "type": "git",
-                    "url": "https://github.com/carhartl/jquery-cookie.git",
-                    "reference": "master"
+            "type":"package",
+            "package":{
+                "name":"jquery/cookie",
+                "version":"master",
+                "source":{
+                    "type":"git",
+                    "url":"https://github.com/carhartl/jquery-cookie.git",
+                    "reference":"master"
                 }
             }
         }
 
     ],
-    "minimum-stability": "dev"
+    "minimum-stability":"dev"
 
 }
