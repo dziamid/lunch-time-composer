@@ -6,16 +6,17 @@ Feature: menu
 
   @javascript
   Scenario: Display menu for today
+    Given the database is clean
     Given there are menu items:
-      | title               | price |
-      | Борщ                | 10500 |
-      | Куриный суп с рисом | 12000 |
-      | Рассольник          | 8500  |
-#    Given there are menus:
-#      | due_date   |
-#      | 2012-07-16 |
-#      | 2012-07-17 |
-#      | 2012-07-18 |
+      | title               | price | category |
+      | Борщ                | 10500 | Супы     |
+      | Куриный суп с рисом | 12000 | Супы     |
+      | Рассольник          | 8500  | Супы     |
+    Given there are menus:
+      | date       | items               |
+      | 2012-07-16 | Борщ, Рассольник    |
+      | 2012-07-17 | Куриный суп с рисом |
+      | 2012-07-18 | Борщ                |
     Given I am on homepage
     And I wait for menu to load
     When I follow "July 16"

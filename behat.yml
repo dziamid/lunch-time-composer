@@ -1,7 +1,7 @@
 default:
   extensions:
     Behat\MinkExtension\Extension:
-      base_url: http://lunch-time/app_dev.php
+      base_url: http://lunch-time/app_test.php
       goutte: ~
       selenium2: ~
     Behat\Symfony2Extension\Extension: ~
