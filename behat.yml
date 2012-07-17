@@ -4,6 +4,7 @@ default:
       base_url: http://lunch-time/app_dev.php
       goutte: ~
       selenium2: ~
+    Behat\Symfony2Extension\Extension: ~
 
   paths:
     features:  features
