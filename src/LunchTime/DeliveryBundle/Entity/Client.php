@@ -38,6 +38,20 @@ class Client
     private $phone;
 
     /**
+     * @var string $email;
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string $token;
+     *
+     * @ORM\Column(name="token", type="string", length=255)
+     */
+    private $token;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="\LunchTime\DeliveryBundle\Entity\Client\Order", mappedBy="client")
@@ -135,5 +149,37 @@ class Client
     public function getCompany()
     {
         return $this->company;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 }

@@ -7,11 +7,33 @@
     <p>This is your company's private page. Your employees can join here if they want to have a meal.</p>
 
     <p>
-        <a class="btn btn-primary btn-large">
+        <a class="lt-join btn btn-primary btn-large">
             Join now
         </a>
     </p>
+
 </div>
 
+<form style="display: none;" class="lt-join-form well" method="post" action="{{ path('signup', {'token': company.token}) }}">
+    <label>Your name or nickname</label>
+    <input type="text" name="client[name]" class="span3" placeholder="It will appear on your mealbox..">
+    <label>Your email</label>
+    <input type="text" name="client[email]" class="span3" placeholder="">
+    <span class="help-block">If you want us to email you a secure link to your private page..</span>
+
+    <button type="submit" class="btn">Submit</button>
+</form>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.lt-join').click(function () {
+            $('.lt-join-form').show();
+            return false;
+        });
+    });
+</script>
 {% endblock %}
 
