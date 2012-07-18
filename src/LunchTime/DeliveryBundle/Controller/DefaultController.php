@@ -31,4 +31,23 @@ class DefaultController extends Controller
         ));
     }
 
+    /**
+     * @Route("/company/{token}")
+     * @Template()
+     */
+    public function companyAction($token)
+    {
+        /** @var $em \Doctrine\ORM\EntityManager */
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $company = $em->getRepository('LTDeliveryBundle:Company')->findOneBy(array(
+            'token' => $token,
+        ));
+
+        return $this->render('LTDeliveryBundle:Default:company.html.twig', array(
+            'company' => $company,
+        ));
+
+    }
+
 }
