@@ -5,6 +5,7 @@ namespace LunchTime\DeliveryBundle\Entity\Client;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\SerializerBundle\Annotation as Serializer;
 use Doctrine\Common\Collections\ArrayCollection;
+use LunchTime\DeliveryBundle\Entity\Client;
 
 /**
  * LunchTime\DeliveryBundle\Entity\Client\Order
@@ -46,6 +47,10 @@ class Order
      */
     private $due_date;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="\LunchTime\DeliveryBundle\Entity\Client\Order", inversedBy="orders")
+     */
+    private $client;
 
     /**
      * Get id
@@ -71,7 +76,7 @@ class Order
     /**
      * Add items
      *
-     * @param LunchTime\DeliveryBundle\Entity\Client\Order\Item $items
+     * @param \LunchTime\DeliveryBundle\Entity\Client\Order\Item $items
      */
     public function addItem(\LunchTime\DeliveryBundle\Entity\Client\Order\Item $items)
     {
@@ -81,7 +86,7 @@ class Order
     /**
      * Get items
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return ArrayCollection
      */
     public function getItems()
     {
@@ -91,7 +96,7 @@ class Order
     /**
      * Set due_date
      *
-     * @param date $dueDate
+     * @param \DateTime $dueDate
      */
     public function setDueDate($dueDate)
     {
@@ -101,7 +106,7 @@ class Order
     /**
      * Get due_date
      *
-     * @return date 
+     * @return \DateTime
      */
     public function getDueDate()
     {
@@ -122,5 +127,15 @@ class Order
     public function getClientId()
     {
         return $this->client_id;
+    }
+
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
+
+    public function getClient()
+    {
+        return $this->client;
     }
 }
