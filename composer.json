@@ -29,7 +29,9 @@
         "jquery/jquery":"1.7.2",
         "datejs/datejs":"dev-master",
         "jquery/cookie":"dev-master",
-        "stof/doctrine-extensions-bundle":"dev-master",
+        "stof/doctrine-extensions-bundle":"dev-master"
+    },
+    "require-dev": {
         "behat/behat":"2.4.*@stable",
         "behat/mink":"1.4.*@stable",
         "behat/mink-extension":"*",
