@@ -6,6 +6,20 @@
 
     <p>This is your company's private page. Your employees can join here if they want to have a meal.</p>
 
+    <p></p>
+
+    {% if company.clients %}
+    <div class="lt-company-clients">
+        <p>Some people from your company have already joined. </p>
+        <ul>
+            {% for client in company.clients %}
+            <li>{{ client.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% endif %}
+
     <p>
         <a class="lt-join btn btn-primary btn-large">
             Join now
