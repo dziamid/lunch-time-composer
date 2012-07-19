@@ -1,5 +1,15 @@
 {% extends 'LTDeliveryBundle::layout.html.twig' %}
 
+{% block app %}
+{{ parent() }}
+<script type="text/javascript">
+    LT.config.menus = {{ menus | serialize('json') | raw }};
+    LT.config.orders = {{ orders | serialize('json') | raw }};
+
+    LT.config.orderPersist = "{{ path('orderPersist', {'token': client.token}) }}";
+</script>
+{% endblock %}
+
 {% block body %}
 <div class="hero-unit">
     <h1>Hello, {{ client.name }}!</h1>
@@ -7,5 +17,8 @@
     <p>This is your private page for making orders. Enjoy.</p>
 
 </div>
+
+{% include 'LTDeliveryBundle:Default:menu.html.twig' %}
+
 {% endblock %}
 

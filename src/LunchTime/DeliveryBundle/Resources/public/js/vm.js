@@ -69,7 +69,7 @@ LT.viewModel = new (function (config) {
         console.log(orderData);
 
         $.ajax({
-            url: config.orderBaseUrl,
+            url: config.orderPersist,
             data: orderData,
             type: 'POST',
             dataType: 'json',

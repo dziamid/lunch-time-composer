@@ -48,7 +48,7 @@ class Order
     private $due_date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\LunchTime\DeliveryBundle\Entity\Client\Order", inversedBy="orders")
+     * @ORM\ManyToOne(targetEntity="\LunchTime\DeliveryBundle\Entity\Client", inversedBy="orders")
      */
     private $client;
 

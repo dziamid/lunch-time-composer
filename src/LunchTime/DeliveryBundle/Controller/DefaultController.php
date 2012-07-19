@@ -8,14 +8,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
 use LunchTime\DeliveryBundle\Entity\Client;
-use LunchTime\DeliveryBundle\Entity\Company;
 
-class DefaultController extends Controller
+class DefaultController extends BaseController
 {
     //TODO: move to company controller
-
-    /** @var Company $company Current company */
-    protected $company = null;
 
     /**
      * @Route("/")
@@ -23,9 +19,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        /** @var $em \Doctrine\ORM\EntityManager */
-        $em = $this->getDoctrine()->getEntityManager();
-
+        $em = $this->getEntityManager();
 
         $menus = $em->getRepository('LTDeliveryBundle:Menu')->getListWithItemsQuery()
             ->getResult();
@@ -34,7 +28,7 @@ class DefaultController extends Controller
             ->getResult();
 
         return $this->render('LTDeliveryBundle:Default:index.html.twig', array(
-            'menus' => $menus,
+            'menus'  => $menus,
             'orders' => $orders,
         ));
     }
@@ -63,6 +57,9 @@ class DefaultController extends Controller
 
         return $this->render('LTDeliveryBundle:Default:client.html.twig', array(
             'client' => $client,
+            'menus'  => $this->getMenus(),
+            'orders' => $client->getOrders(),
+
         ));
 
     }
@@ -72,8 +69,7 @@ class DefaultController extends Controller
      */
     public function signup($token)
     {
-        /** @var $em EntityManager */
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getEntityManager();
 
         //expecting array {client: [name, email]}
         $data = $this->getRequest()->get('client');
@@ -87,48 +83,6 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('clientPage', array(
             'token' => $client->getToken(),
         )));
-    }
-
-    protected function mapClient($data)
-    {
-        $client = new Client();
-
-        $client->setCompany($data['company']);
-        $client->setName($data['name']);
-        $client->setEmail($data['email']);
-        $client->setToken(Company::generateToken(10));
-
-        return $client;
-    }
-
-    protected function getCompany($token)
-    {
-        $em = $this->getEntityManager();
-
-        $company = $em->getRepository('LTDeliveryBundle:Company')->findOneBy(array(
-            'token' => $token,
-        ));
-
-        return $company;
-    }
-
-    protected function getClient($token)
-    {
-        $em = $this->getEntityManager();
-
-        $client = $em->getRepository('LTDeliveryBundle:Client')->findOneBy(array(
-            'token' => $token,
-        ));
-
-        return $client;
-    }
-
-    /**
-     * @return \Doctrine\ORM\EntityManager
-     */
-    protected function getEntityManager()
-    {
-        return $this->getDoctrine()->getEntityManager();
     }
 
 }
