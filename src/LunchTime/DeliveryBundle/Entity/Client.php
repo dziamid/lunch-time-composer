@@ -189,6 +189,8 @@ class Client
      */
     public function prePersist()
     {
-        $this->setToken(Company::generateToken(10));
+        if (false == $this->getToken()) {
+            $this->setToken(Company::generateToken(10));
+        }
     }
 }

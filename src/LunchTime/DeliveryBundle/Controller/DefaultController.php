@@ -34,7 +34,7 @@ class DefaultController extends BaseController
     }
 
     /**
-     * @Route("/company/{token}")
+     * @Route(pattern="/company/{token}", name="companyPage")
      * @Template()
      */
     public function companyAction($token)

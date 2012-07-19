@@ -15,6 +15,7 @@ class CompanyFixtures extends AbstractFixture implements FixtureInterface, Order
         $company = new Company();
 
         $company->setTitle('Taucraft');
+        $company->setToken('Taucraft');
         $manager->persist($company);
         $this->setReference('company-taucraft', $company);
 
