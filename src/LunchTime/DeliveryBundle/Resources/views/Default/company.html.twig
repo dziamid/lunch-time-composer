@@ -1,4 +1,4 @@
-{% extends 'LTDeliveryBundle::layout.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body %}
 <div class="hero-unit">
@@ -14,19 +14,38 @@
 
 </div>
 
-<form style="display: none;" class="lt-join-form well" method="post" action="{{ path('signup', {'token': company.token}) }}">
-    <label>Your name or nickname</label>
-    <input type="text" name="client[name]" class="span3" placeholder="It will appear on your mealbox..">
-    <label>Your email</label>
-    <input type="text" name="client[email]" class="span3" placeholder="">
-    <span class="help-block">If you want us to email you a secure link to your private page..</span>
+<form style="display: none;" class="lt-join-form well form-horizontal" method="post"
+      action="{{ path('signup', {'token': company.token}) }}">
+    <fieldset>
+        <div class="control-group">
+            <label class="control-label" for="input01">Your name or nickname</label>
 
-    <button type="submit" class="btn">Submit</button>
+            <div class="controls">
+                <input name="client[name]" required="required" type="text" class="input-xlarge" id="input01">
+
+                <p class="help-block">It will appear on your mealbox..</p>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="input01">Your email</label>
+
+            <div class="controls">
+                <input name="client[email]" type="text" class="input-xlarge" id="input01">
+
+                <p class="help-block">If you want us to email you a secure link to your private page..</p>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+
 </form>
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
+{{ parent() }}
 <script type="text/javascript">
     $(document).ready(function () {
         $('.lt-join').click(function () {
