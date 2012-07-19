@@ -11,6 +11,7 @@ use LunchTime\DeliveryBundle\Entity\Company;
  *
  * @ORM\Table(name="Client")
  * @ORM\Entity(repositoryClass="LunchTime\DeliveryBundle\Entity\ClientRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Client
 {
@@ -181,5 +182,13 @@ class Client
     public function getToken()
     {
         return $this->token;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $this->setToken(Company::generateToken(10));
     }
 }

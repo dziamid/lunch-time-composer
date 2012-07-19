@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Table(name="Company")
  * @ORM\Entity(repositoryClass="LunchTime\DeliveryBundle\Entity\CompanyRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Company
 {
@@ -122,6 +123,14 @@ class Company
     public function getClients()
     {
         return $this->clients;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $this->setToken(Company::generateToken(10));
     }
 
 }
