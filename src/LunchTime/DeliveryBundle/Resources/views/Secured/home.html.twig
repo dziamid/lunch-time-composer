@@ -4,11 +4,17 @@
 
 
 {% block body %}
-    <h1>Hello {{ app.user.username }}!</h1>
-        <p><a href="{{ path('backend_logout') }}">Logout</a></p>
-    {% for flashMessage in app.session.flashbag.get('notice') %}
-        <div class="flash-message">
-            <em>Notice</em>: {{ flashMessage }}
-        </div>
-    {% endfor %}
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="flash-message">
+        <em>Notice</em>: {{ flashMessage }}
+    </div>
+{% endfor %}
+
+<div class="hero-unit">
+    <h1>Hello, {{ app.user.username }}!</h1>
+
+    <p>This is the backend for management of clients and menus.</p>
+    <p><a href="{{ path('backend_logout') }}">Logout here</a></p>
+</div>
+
 {% endblock %}
