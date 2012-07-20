@@ -1,6 +1,6 @@
 <?php
 
-namespace LunchTime\DeliveryBundle\Controller;
+namespace LunchTime\DeliveryBundle\Controller\Base;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

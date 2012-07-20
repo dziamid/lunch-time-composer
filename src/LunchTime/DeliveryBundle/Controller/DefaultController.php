@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
 use LunchTime\DeliveryBundle\Entity\Client;
+use LunchTime\DeliveryBundle\Controller\Base\BaseController;
 
 class DefaultController extends BaseController
 {
