@@ -4,14 +4,14 @@
 {{ parent() }}
 <script type="text/javascript">
     LT.config.menus = {{ menus | serialize('json') | raw }};
-    LT.config.orders = {{ orders | serialize('json') | raw }};
-
-    LT.config.orderPersist = "{{ path('orderPersist') }}";
 </script>
 {% endblock %}
 
 {% block body %}
 
     {% include 'LTDeliveryBundle:Default:menu.html.twig' %}
+    {# TODO: submit your order on homepage should go to some signup|delivery page #}
+    {# TODO: order well should not be visible by default #}
+    {# TODO: order should collect data to cookies that expire when data in not relevant #}
 
 {% endblock %}

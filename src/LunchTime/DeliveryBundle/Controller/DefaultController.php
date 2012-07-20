@@ -17,7 +17,7 @@ class DefaultController extends BaseController
      * @Route("/")
      * @Template()
      */
-    public function indexAction()
+    public function homeAction()
     {
         $em = $this->getEntityManager();
 
@@ -27,10 +27,10 @@ class DefaultController extends BaseController
         $orders = $em->getRepository('LTDeliveryBundle:Client\Order')->getListWithItemsQuery()
             ->getResult();
 
-        return $this->render('LTDeliveryBundle:Default:index.html.twig', array(
+        return array(
             'menus'  => $menus,
             'orders' => $orders,
-        ));
+        );
     }
 
     /**
@@ -41,9 +41,9 @@ class DefaultController extends BaseController
     {
         $company = $this->getCompany($token);
 
-        return $this->render('LTDeliveryBundle:Default:company.html.twig', array(
+        return array(
             'company' => $company,
-        ));
+        );
 
     }
 
@@ -55,12 +55,12 @@ class DefaultController extends BaseController
     {
         $client = $this->getClient($token);
 
-        return $this->render('LTDeliveryBundle:Default:client.html.twig', array(
+        return array(
             'client' => $client,
             'menus'  => $this->getMenus(),
             'orders' => $client->getOrders(),
 
-        ));
+        );
 
     }
 

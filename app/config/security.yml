@@ -14,8 +14,8 @@ security:
         in_memory:
             memory:
                 users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+                    #user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    backend: { password: ubuntu, roles: [ 'ROLE_ADMIN' ]}
 
     firewalls:
         dev:
@@ -23,17 +23,17 @@ security:
             security: false
 
         login:
-            pattern:  ^/demo/secured/login$
+            pattern:  ^/backend/login$
             security: false
 
         secured_area:
-            pattern:    ^/demo/secured/
+            pattern:    ^/backend/
             form_login:
-                check_path: /demo/secured/login_check
-                login_path: /demo/secured/login
+                check_path: /backend/login_check
+                login_path: /backend/login
             logout:
-                path:   /demo/secured/logout
-                target: /demo/
+                path:   /backend/logout
+                target: /
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
