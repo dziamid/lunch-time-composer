@@ -1,3 +1,4 @@
+
 # Internal routing configuration to handle ESI
 #_internal:
 #    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
@@ -7,3 +8,12 @@ LTDeliveryBundle:
     resource: "@LTDeliveryBundle/Controller/"
     type:     annotation
     prefix:   /
+
+LTBackendBundle:
+    resource: "@LTBackendBundle/Controller/"
+    type:     annotation
+    prefix:   /backend
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin

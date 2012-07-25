@@ -23,6 +23,13 @@ class AppKernel extends Kernel
             new LunchTime\DeliveryBundle\LTDeliveryBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new LunchTime\BackendBundle\LTBackendBundle(),
+            new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\CacheBundle\SonataCacheBundle(),
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new \Knp\Bundle\MenuBundle\KnpMenuBundle()
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
