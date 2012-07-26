@@ -31,6 +31,8 @@ security:
             form_login:
                 check_path: /backend/login_check
                 login_path: /backend/login
+                always_use_default_target_path: true
+                default_target_path: /backend/dashboard
             logout:
                 path:   /backend/logout
                 target: /

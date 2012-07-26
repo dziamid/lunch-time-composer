@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: %locale% }
+    translator:      { fallback: %locale% }
     secret:          %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -133,4 +133,4 @@ sonata_admin:
             - { position: left, type: sonata.admin.block.admin_list }
 
         groups:
-            default: ~
+            Menu: ~

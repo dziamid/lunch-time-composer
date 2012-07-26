@@ -44,17 +44,4 @@ class DefaultController extends Controller
         // The security layer will intercept this request
     }
 
-    /**
-     * @Route("/home", name="backend_homepage")
-     * @Secure(roles="ROLE_ADMIN")
-     * @Template()
-     */
-    public function homeAction()
-    {
-        $user = $this->getUser();
-
-        return array(
-            'user' => $user
-        );
-    }
 }
