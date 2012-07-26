@@ -11,6 +11,14 @@ use Symfony\Component\Security\Core\SecurityContext;
 class DefaultController extends Controller
 {
     /**
+     * @Route("/", name="home")
+     */
+    public function homeAction()
+    {
+        return $this->redirect($this->generateUrl('sonata_admin_dashboard'));
+    }
+
+    /**
      * @Route("/login", name="backend_login")
      * @Template()
      */
