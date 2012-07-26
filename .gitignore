@@ -10,4 +10,4 @@ app/config/parameters.yml
 build/
 vendor
 composer.phar
-composer.lock
+#composer.lock
