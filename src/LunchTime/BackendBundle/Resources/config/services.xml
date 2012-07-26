@@ -6,16 +6,32 @@
 
 
     <parameters>
-        <parameter key="lt.backend.menu.entity">LunchTime\DeliveryBundle\Entity\Menu</parameter>
-        <parameter key="lt.backend.menu.admin">LunchTime\BackendBundle\Admin\MenuAdmin</parameter>
+        <parameter key="lt.backend.entity.menu">LunchTime\DeliveryBundle\Entity\Menu</parameter>
+        <parameter key="lt.backend.admin.menu">LunchTime\BackendBundle\Admin\MenuAdmin</parameter>
+        <parameter key="lt.backend.entity.menu.item">LunchTime\DeliveryBundle\Entity\Menu\Item</parameter>
+        <parameter key="lt.backend.admin.menu.item">LunchTime\BackendBundle\Admin\Menu\ItemAdmin</parameter>
+
         <parameter key="lt.backend.menu.crud">SonataAdminBundle:CRUD</parameter>
+
     </parameters>
 
     <services>
-        <service id="lt.backend.menu" class="%lt.backend.menu.admin%">
-            <tag name="sonata.admin" manager_type="orm" group="Menu" label="All menus"/>
+        <service id="lt.backend.menu" class="%lt.backend.admin.menu%">
+            <tag name="sonata.admin"
+                 manager_type="orm"
+                 group="Menu"
+                 label="All menus"
+                 label_translator_strategy="sonata.admin.label.strategy.noop"/>
             <argument/>
-            <argument>%lt.backend.menu.entity%</argument>
+            <argument>%lt.backend.entity.menu%</argument>
+            <argument>%lt.backend.menu.crud%</argument>
+
+        </service>
+
+        <service id="lt.backend.menu.item" class="%lt.backend.admin.menu.item%">
+            <tag name="sonata.admin" manager_type="orm" group="Menu" label="All meals"/>
+            <argument/>
+            <argument>%lt.backend.entity.menu.item%</argument>
             <argument>%lt.backend.menu.crud%</argument>
 
             <call method="setTranslationDomain">

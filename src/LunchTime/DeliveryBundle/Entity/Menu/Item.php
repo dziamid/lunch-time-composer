@@ -3,8 +3,10 @@
 namespace LunchTime\DeliveryBundle\Entity\Menu;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use JMS\SerializerBundle\Annotation as Serializer;
 use Symfony\Component\DependencyInjection\Container;
+use LunchTime\DeliveryBundle\Entity\Menu;
 
 /**
  * LunchTime\DeliveryBundle\Entity\Menu\Item
@@ -31,6 +33,8 @@ class Item
     private $title;
 
     /**
+     * @var ArrayCollection
+     *
      * @Serializer\Exclude
      * @ORM\ManyToMany(targetEntity="\LunchTime\DeliveryBundle\Entity\Menu", inversedBy="items")
      */
@@ -124,9 +128,14 @@ class Item
         }
     }
 
-    public function addMenu(\LunchTime\DeliveryBundle\Entity\Menu $menu)
+    public function addMenu(Menu $menu)
     {
         $this->menus[] = $menu;
+    }
+
+    public function removeMenu(Menu $menu)
+    {
+        $this->menus->removeElement($menu);
     }
 
     public function getMenus()

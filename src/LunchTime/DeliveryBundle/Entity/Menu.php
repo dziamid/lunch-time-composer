@@ -3,7 +3,9 @@
 namespace LunchTime\DeliveryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use JMS\SerializerBundle\Annotation as Serializer;
+use LunchTime\DeliveryBundle\Entity\Menu\Item;
 
 /**
  * LunchTime\DeliveryBundle\Entity\Menu
@@ -74,23 +76,36 @@ class Menu
     }
     
     /**
-     * Add items
+     * Add item
      *
-     * @param LunchTime\DeliveryBundle\Entity\Menu\Item $items
+     * @param Item $items
      */
-    public function addItem(\LunchTime\DeliveryBundle\Entity\Menu\Item $item)
+    public function addItem(Item $item)
     {
         $item->addMenu($this);
         $this->items[] = $item;
     }
 
     /**
+     * Remove item
+     *
+     * @param LunchTime\DeliveryBundle\Entity\Menu\Item $item
+     */
+    public function removeItem(Item $item)
+    {
+        $item->removeMenu($this);
+
+        $this->items->removeElement($item);
+    }
+
+    /**
      * Get items
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return ArrayCollection
      */
     public function getItems()
     {
         return $this->items;
     }
+
 }

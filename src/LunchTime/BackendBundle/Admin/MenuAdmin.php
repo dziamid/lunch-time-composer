@@ -17,13 +17,21 @@ class MenuAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('due_date');
+            ->add('due_date')
+            ->add('items', null, array(
+                'by_reference' => false,
+                'expanded'     => false,
+                'multiple'     => true,
+                'help'         => "Select meals for menu",
+                'label'        => "Meals"
+            )
+        );
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper;
-            //->add('due_date', 'doctrine_orm_datetime_range'); exception
+        $datagridMapper
+            ->add('items');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -32,6 +40,14 @@ class MenuAdmin extends Admin
             ->addIdentifier('id')
             ->add('due_date');
 
+    }
+
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        $errorElement
+            ->with('due_date')
+                ->assertNotBlank()
+            ->end();
     }
 
 }

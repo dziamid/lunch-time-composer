@@ -87,6 +87,12 @@ class Category
         $this->items = new ArrayCollection();
         $this->children = new ArrayCollection();
     }
+
+    function __toString()
+    {
+        return $this->title;
+    }
+
     /**
      * Get id
      *
