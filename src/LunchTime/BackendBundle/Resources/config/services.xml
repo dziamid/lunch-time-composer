@@ -20,8 +20,7 @@
             <tag name="sonata.admin"
                  manager_type="orm"
                  group="Menu"
-                 label="All menus"
-                 label_translator_strategy="sonata.admin.label.strategy.noop"/>
+                 label="All menus" />
             <argument/>
             <argument>%lt.backend.entity.menu%</argument>
             <argument>%lt.backend.menu.crud%</argument>
