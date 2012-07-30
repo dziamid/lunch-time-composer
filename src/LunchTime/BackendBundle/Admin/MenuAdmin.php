@@ -20,7 +20,7 @@ class MenuAdmin extends Admin
             ->add('due_date')
             ->add('items', null, array(
                 'by_reference' => false,
-                'expanded'     => false,
+                'expanded'     => true,
                 'multiple'     => true,
                 'help'         => "Select meals for menu",
                 'label'        => "Meals"
