@@ -41,14 +41,14 @@ class Client
     /**
      * @var string $email;
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true, unique=true)
      */
     private $email;
 
     /**
      * @var string $token;
      *
-     * @ORM\Column(name="token", type="string", length=255)
+     * @ORM\Column(name="token", type="string", length=255, unique=true)
      */
     private $token;
 
@@ -193,4 +193,5 @@ class Client
             $this->setToken(Company::generateToken(10));
         }
     }
+
 }

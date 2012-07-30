@@ -134,3 +134,4 @@ sonata_admin:
 
         groups:
             Menu: ~
+            Client: ~

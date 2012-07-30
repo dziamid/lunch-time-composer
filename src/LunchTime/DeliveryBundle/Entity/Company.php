@@ -45,6 +45,11 @@ class Company
      */
     private $clients;
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     /**
      * Get id
      *
@@ -76,7 +81,6 @@ class Company
     {
         return $this->title;
     }
-
 
     /**
      * @static
