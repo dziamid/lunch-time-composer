@@ -10,6 +10,8 @@
         <parameter key="lt.backend.admin.menu">LunchTime\BackendBundle\Admin\MenuAdmin</parameter>
         <parameter key="lt.backend.entity.menu.item">LunchTime\DeliveryBundle\Entity\Menu\Item</parameter>
         <parameter key="lt.backend.admin.menu.item">LunchTime\BackendBundle\Admin\Menu\ItemAdmin</parameter>
+        <parameter key="lt.backend.entity.menu.category">LunchTime\DeliveryBundle\Entity\Menu\Category</parameter>
+        <parameter key="lt.backend.admin.menu.category">LunchTime\BackendBundle\Admin\Menu\CategoryAdmin</parameter>
 
         <parameter key="lt.backend.menu.crud">SonataAdminBundle:CRUD</parameter>
 
@@ -37,6 +39,18 @@
                 <argument>SonataAdminBundle</argument>
             </call>
         </service>
+
+        <service id="lt.backend.menu.category" class="%lt.backend.admin.menu.category%">
+            <tag name="sonata.admin" manager_type="orm" group="Menu" label="All meal categories"/>
+            <argument/>
+            <argument>%lt.backend.entity.menu.category%</argument>
+            <argument>%lt.backend.menu.crud%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>SonataAdminBundle</argument>
+            </call>
+        </service>
+
     </services>
 
 </container>

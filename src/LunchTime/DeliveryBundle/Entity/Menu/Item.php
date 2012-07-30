@@ -49,6 +49,7 @@ class Item
 
     /**
      * @ORM\ManyToOne(targetEntity="\LunchTime\DeliveryBundle\Entity\Menu\Category", inversedBy="items")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $category;
 

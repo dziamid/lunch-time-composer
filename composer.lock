@@ -1,5 +1,5 @@
 {
-    "hash": "3f63882dfb16a0035f94dc54e55797f3",
+    "hash": "019969b3a17d21015b99327d4c98e7b3",
     "packages": [
         {
             "package": "datejs/datejs",
@@ -42,16 +42,28 @@
             "commit-date": "1341472847"
         },
         {
+            "package": "doctrine/doctrine-migrations-bundle",
+            "version": "dev-master",
+            "source-reference": "3792aa78445773387754c6853bbd7f4dcb31f486",
+            "commit-date": "1341472972"
+        },
+        {
+            "package": "doctrine/migrations",
+            "version": "dev-master",
+            "source-reference": "b86b4cc0a39714f0aa53b908d495beacfa0e4011",
+            "commit-date": "1343202693"
+        },
+        {
             "package": "doctrine/orm",
             "version": "2.2.x-dev",
-            "source-reference": "5d2a3bcb3b467f41ee58575764f3ba84937f76e4",
-            "commit-date": "1341676080"
+            "source-reference": "7d343302a8f886be9cfb2a9c8345a95740dcfde9",
+            "commit-date": "1343560954"
         },
         {
             "package": "gedmo/doctrine-extensions",
             "version": "dev-master",
-            "source-reference": "9898253452a37733d278af6fc595b059327c4218",
-            "commit-date": "1342872222"
+            "source-reference": "ad263cf7112bd1f725db407266874f390a73917e",
+            "commit-date": "1343504231"
         },
         {
             "package": "jms/aop-bundle",
@@ -95,13 +107,21 @@
         },
         {
             "package": "knplabs/knp-menu",
-            "version": "1.1.x-dev",
-            "source-reference": "v1.1.2",
-            "commit-date": "1339345240"
+            "version": "dev-master",
+            "alias-pretty-version": "2.0.x-dev",
+            "alias-version": "2.0.9999999.9999999-dev"
+        },
+        {
+            "package": "knplabs/knp-menu",
+            "version": "dev-master",
+            "source-reference": "418788056ba5b95f4a2717ba5b4d4ab078aca4ab",
+            "commit-date": "1340209324"
         },
         {
             "package": "knplabs/knp-menu-bundle",
-            "version": "v1.1.0"
+            "version": "dev-master",
+            "source-reference": "ba1ff625e4b34131106e12ee475eb6397eb5a758",
+            "commit-date": "1341324163"
         },
         {
             "package": "kriswallsmith/assetic",
@@ -134,14 +154,8 @@
         {
             "package": "sensio/framework-extra-bundle",
             "version": "dev-master",
-            "source-reference": "fa991fca34d5474cae37a2d97e3d30058253d35c",
-            "commit-date": "1343372485"
-        },
-        {
-            "package": "sensio/generator-bundle",
-            "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
+            "source-reference": "dbe4432742e16ee9ca550a2f953b059f0a80c53d",
+            "commit-date": "1343637454"
         },
         {
             "package": "sensio/generator-bundle",
@@ -152,8 +166,8 @@
         {
             "package": "sonata-project/admin-bundle",
             "version": "dev-master",
-            "source-reference": "9ecbaf70fdaaad02098c0e6bdc15b156703363f1",
-            "commit-date": "1343341010"
+            "source-reference": "47fdb8677041d896b3443705e5906af3850430e2",
+            "commit-date": "1343598892"
         },
         {
             "package": "sonata-project/block-bundle",
@@ -170,8 +184,8 @@
         {
             "package": "sonata-project/doctrine-orm-admin-bundle",
             "version": "dev-master",
-            "source-reference": "bfd5f6f399f6f0390264d14d9d5c4e60bf45f59e",
-            "commit-date": "1343298503"
+            "source-reference": "aff26e9b857e6e8e4c80629debce90ad560e1708",
+            "commit-date": "1343578015"
         },
         {
             "package": "sonata-project/exporter",
@@ -230,8 +244,8 @@
         {
             "package": "symfony/symfony",
             "version": "dev-master",
-            "source-reference": "b6954e7f0b5adef8aaa79832e0b0c3a8bc1e4d76",
-            "commit-date": "1343380470"
+            "source-reference": "cbd03ec4c66567cf2bf4ea9e0e3315a522b4eeb3",
+            "commit-date": "1343635713"
         },
         {
             "package": "twig/extensions",
@@ -248,8 +262,8 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "657de7bdeb680815e0df95f63da9f81e1533d2ea",
-            "commit-date": "1342953178"
+            "source-reference": "51c866f415bbee670cd9ba13591307bce8dabdca",
+            "commit-date": "1343464333"
         },
         {
             "package": "twitter/bootstrap",
@@ -278,6 +292,8 @@
         "stof/doctrine-extensions-bundle": 20,
         "sonata-project/admin-bundle": 20,
         "sonata-project/doctrine-orm-admin-bundle": 20,
+        "doctrine/doctrine-migrations-bundle": 20,
+        "knplabs/knp-menu-bundle": 20,
         "behat/behat": 0,
         "behat/mink": 0
     }
