@@ -13,7 +13,9 @@
     <div id="active-menu" class="span6" data-bind="with: activeMenu">
         <div class="well lt-list" style="padding: 8px 0">
             <ul class="nav nav-list">
-                <li class="nav-header">Menu for <span data-bind="text: title"></span></li>
+                <li class="nav-header">
+                    {% trans with {'%date%': '<span data-bind="text: title"></span>'} %}Menu for %date%{% endtrans %}
+                </li>
                 <!-- ko foreach: categories -->
                     <li class="nav-header"><span data-bind="text: title"></span></li>
                     <!-- ko foreach: $parent.getItemsForCategory($data) -->
@@ -32,7 +34,9 @@
     <div class="span6">
         <div class="well lt-list" style="padding: 8px 0" data-bind="with: activeOrder">
             <ul class="nav nav-list">
-                <li class="nav-header">Your order for <span data-bind="text: title"></span></li>
+                <li class="nav-header">
+                    {% trans with {'%date%': '<span data-bind="text: title"></span>'} %}Your order for %date%{% endtrans %}
+                </li>
                 <!-- ko foreach: activeCategories -->
                     <li class="nav-header"><span data-bind="text: title"></span></li>
                     <!-- ko foreach: $parent.getActiveItemsForCategory($data) -->

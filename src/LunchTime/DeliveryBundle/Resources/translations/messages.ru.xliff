@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Menu for %date%</source>
+                <target>Меню на %date%</target>
+            </trans-unit>
+
+            <trans-unit id="2">
+                <source>Your order for %date%</source>
+                <target>Ваш заказ на %date%</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Hello, %name%</source>
+                <target>Привет, %name%!</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Hello, %title%</source>
+                <target>Здравствуйте, %title%!</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>This is your private page for making orders.</source>
+                <target>Это ваша личная страница для заказов.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>This is your company's private page. Your employees can join here if they want to have a meal.
+                </source>
+                <target>Это личная страница вашей компании. Здесь ваши сотрудники могут создать себе личную страницу.
+                </target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Some people from your company have already joined.</source>
+                <target>Некоторые сотрудники вашей компании уже используют наш сервис.</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Join now</source>
+                <target>На личную страницу</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>view his page</source>
+                <target>посмотреть его страницу</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>Your name or nickname</source>
+                <target>Имя или никнейм</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>It will appear on your mealbox..</source>
+                <target>Будет используется для подписи вашей доставки</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>Your email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>If you want us to email you a secure link to your private page..</source>
+                <target></target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>Your phone number</source>
+                <target>Номер телефона</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>We will contact you to confirm your order if necessary</source>
+                <target>Мы с вами свяжемся для подтвеждения заказа (при необходимости)</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>Submit</source>
+                <target>Отправить</target>
+            </trans-unit>
+
+            <trans-unit id="17">
+                <source>Back to company page</source>
+                <target>Перейти на страницу компании</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>
