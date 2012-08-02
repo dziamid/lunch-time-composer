@@ -4,14 +4,16 @@
 <div class="hero-unit">
     <h1>{% trans with {'%title%': company.title} %}Hello, %title%{% endtrans %}</h1>
 
-    <p>{% trans %}This is your company's private page. Your employees can join here if they want to have a meal.{% endtrans %}</p>
+    <p>{% trans %}This is your company's private page. Your employees can join here if they want to have a
+        meal.{% endtrans %}</p>
 
     {% if company.clients %}
     <div class="lt-company-clients">
         <p>{% trans %}Some people from your company have already joined.{% endtrans %}</p>
         <ul>
             {% for client in company.clients %}
-            <li>{{ client.name }} - <a href="{{ path('clientPage', {'token': client.token})}}">{% trans %}view his page{% endtrans %}</a></li>
+            <li>{{ client.name }} - <a href="{{ path('clientPage', {'token': client.token})}}">{% trans %}view his
+                page{% endtrans %}</a></li>
             {% endfor %}
         </ul>
     </div>
@@ -45,7 +47,8 @@
             <div class="controls">
                 <input name="client[email]" type="text" class="input-xlarge" id="input01">
 
-                <p class="help-block">{% trans %}If you want us to email you a secure link to your private page..{% endtrans %}</p>
+                <p class="help-block">{% trans %}If you want us to email you a secure link to your private
+                    page..{% endtrans %}</p>
             </div>
         </div>
 
@@ -59,9 +62,12 @@
             </div>
         </div>
     </fieldset>
+
+
     <div class="form-actions">
         <button class="btn btn-primary" type="submit">{% trans %}Submit{% endtrans %}</button>
     </div>
+
 
 </form>
 {% endblock %}

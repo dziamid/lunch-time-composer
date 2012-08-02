@@ -24,10 +24,8 @@
                 <target>Это ваша личная страница для заказов.</target>
             </trans-unit>
             <trans-unit id="6">
-                <source>This is your company's private page. Your employees can join here if they want to have a meal.
-                </source>
-                <target>Это личная страница вашей компании. Здесь ваши сотрудники могут создать себе личную страницу.
-                </target>
+                <source>This is your company's private page. Your employees can join here if they want to have a meal.</source>
+                <target>Это личная страница вашей компании. Здесь ваши сотрудники могут создать себе личную страницу.</target>
             </trans-unit>
             <trans-unit id="7">
                 <source>Some people from your company have already joined.</source>
@@ -35,7 +33,7 @@
             </trans-unit>
             <trans-unit id="8">
                 <source>Join now</source>
-                <target>На личную страницу</target>
+                <target>Новый сотрудник</target>
             </trans-unit>
             <trans-unit id="9">
                 <source>view his page</source>
@@ -74,6 +72,23 @@
                 <source>Back to company page</source>
                 <target>Перейти на страницу компании</target>
             </trans-unit>
+
+            <trans-unit id="18">
+                <source>Save your orders</source>
+                <target>Сохранить заказы</target>
+            </trans-unit>
+
+            <trans-unit id="19">
+                <source>Saving..</source>
+                <target>Чуточку терпения..</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>Total price: %price%</source>
+                <target>Цена заказа: %price%</target>
+            </trans-unit>
+
+
+
 
         </body>
     </file>

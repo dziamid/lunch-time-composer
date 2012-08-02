@@ -8,7 +8,7 @@ LT.Menu = function (data) {
     //id is required
     self.id = ko.observable(data.id);
     //date is required
-    self.date = ko.observable(Date.parse(data.date));
+    self.date = ko.observable(Date.parseExact(data.date, 'yyyy-MM-dd HH:mm:ss'));
 
     // add all categories that this menu has to common repository
     for (var i = 0; i < data.items.length; i++) {

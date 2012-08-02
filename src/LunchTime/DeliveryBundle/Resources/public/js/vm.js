@@ -34,16 +34,17 @@ LT.viewModel = new (function (config) {
     self.activateMenu = function (menu) {
         self.activeMenu(menu);
         var order = ko.utils.arrayFirst(self.orders(), function (order) {
-            return order.date().equals(menu.date());
+            var orderDate = order.date();
+            var menuDate = menu.date();
+            return orderDate.equals(menuDate);
         });
         if (!order) {
-            order = new LT.Order({date: menu.date().toString('yyyy-MM-dd HH:mm:ss')});
+            var menuDate = menu.date().toString('yyyy-MM-dd HH:mm:ss');
+            order = new LT.Order({date: menuDate});
             self.orders.push(order);
         }
         self.activeOrder(order);
     };
-
-    self.activeOrder = ko.observable(null);
 
     self.isActiveMenu = function (menu) {
         return menu === self.activeMenu();
@@ -62,21 +63,22 @@ LT.viewModel = new (function (config) {
         self.activeOrder().removeItem(item);
     };
 
-    self.submitOrder = function (data, event) {
+    self.submitOrders = function (data, event) {
         var btn = $(event.target);
 
-        var orderData = ko.toJSON(self.activeOrder());
-        console.log(orderData);
+        var ordersData = ko.toJSON(self.orders());
+        console.log(ordersData);
 
         $.ajax({
             url: config.orderPersist,
-            data: orderData,
+            data: ordersData,
             type: 'POST',
             dataType: 'json',
             success: function (data) {
                 if (data.success) {
-                    var order = new LT.Order(data.order);
-                    self.activeOrder(order);
+                    var orders = new LT.Order(data.orders);
+
+                    //self.activeOrder(order);
                 }
             },
             beforeSend: function () { btn.button('loading')},

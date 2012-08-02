@@ -5,7 +5,7 @@ LT.Order = function (data) {
     var clientId = data.client_id || LT.OrderRepository.generateClientId();
     self.clientId = ko.observable(clientId);
     //date is required
-    self.date = ko.observable(Date.parse(data.date));
+    self.date = ko.observable(Date.parseExact(data.date, 'yyyy-MM-dd HH:mm:ss'));
 
     self.title = ko.computed(function () {
         return self.date().toString('MMMM d');

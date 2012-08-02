@@ -56,12 +56,18 @@
                 <!-- /ko -->
             </ul>
             <div style="padding: 8px 19px">
-                <button class="btn" data-loading-text="saving..." data-bind="click: $root.submitOrder" autocomplete="off">Submit your order</button>
-                Total: <span data-bind="text: totalPrice"></span>
+                {% trans with {'%price%': '<span data-bind="text: totalPrice">'} %}Total price: %price%{% endtrans %}</span>
             </div>
 
         </div>
+        {% if client is defined %}
+            <button class="btn btn-primary" data-loading-text="{% trans %}Saving...{% endtrans %}" data-bind="click: $root.submitOrders" autocomplete="off">
+                {% trans %}Save your orders{% endtrans %}
+            </button>
+        {% endif %}
 
     </div>
+
+
 </div>
 {% endblock %}

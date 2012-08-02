@@ -24,17 +24,20 @@ class OrderController extends BaseController
         $em = $this->getEntityManager();
         $client = $this->getClient($token);
 
-        $data = json_decode($this->getRequest()->getContent(), true);
-        $data = array_merge($data, array('client' => $client));
+        $_orders = json_decode($this->getRequest()->getContent(), true);
+        $orders = array();
+        foreach ($_orders as $_order) {
+            $_order = array_merge($_order, array('client' => $client));
+            $order = $this->mapOrder($_order, $em);
+            $orders[] = $order;
+            $em->persist($order);
+        }
 
-        $order = $this->mapOrder($data, $em);
-
-        $em->persist($order);
         $em->flush();
 
         $result = json_encode(array(
             'success' => true,
-            'order' => json_decode($this->get('serializer')->serialize($order, 'json'), true),
+            'orders'   => json_decode($this->get('serializer')->serialize($orders, 'json'), true),
         ));
 
         return new Response($result);
