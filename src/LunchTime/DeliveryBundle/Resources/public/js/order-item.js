@@ -52,3 +52,24 @@ LT.OrderItem = function (data) {
 
 };
 
+/**
+ * Factory of LT.OrderItem entities
+ *
+ */
+LT.OrderItemRepository = new (function () {
+    var self = this;
+    self.objects = ko.observableArray([]);
+    self.create = function (data) {
+        var object = ko.utils.arrayFirst(self.objects(), function (o) {
+            return ko.utils.unwrapObservable(o.id) == data.id;
+        });
+        if (!object) {
+            object = new LT.OrderItem(data);
+            self.objects.push(object);
+        }
+
+        return object;
+    };
+
+
+});

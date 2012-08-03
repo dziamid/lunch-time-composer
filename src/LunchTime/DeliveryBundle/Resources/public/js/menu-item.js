@@ -32,8 +32,9 @@ LT.MenuItemRepository = new (function () {
         });
         if (!object) {
             object = new LT.MenuItem(data);
+            self.objects.push(object);
         }
-        self.objects.push(object);
+
         return object;
     };
 

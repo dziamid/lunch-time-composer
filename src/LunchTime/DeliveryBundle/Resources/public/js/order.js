@@ -1,32 +1,24 @@
 
 LT.Order = function (data) {
     var self = this;
-    self.update = LT.Order;
-    data = data || {};
-    self.id = ko.observable(data.id || null);
-    var clientId = data.client_id || LT.OrderRepository.generateClientId();
-    self.clientId = ko.observable(clientId);
-    //date is required
-    self.date = ko.observable(Date.parseExact(data.date, 'yyyy-MM-dd HH:mm:ss'));
 
-    self.title = ko.computed(function () {
+    self.id = ko.observable();
+    self.clientId = ko.observable();
+    self.date = ko.observable();
+    self.items = ko.observableArray([]);
+
+    self.title = ko.deferredComputed(function () {
         return self.date().toString('MMMM d');
     });
 
-    self.items = ko.observableArray([]);
-    data.items = data.items || [];
-    for (var i = 0; i < data.items.length; i++) {
-        self.items.push(new LT.OrderItem(data.items[i]));
-    }
-
-    self.activeItems = ko.computed(function () {
+    self.activeItems = ko.deferredComputed(function () {
         return ko.utils.arrayFilter(self.items(), function (item) {
             return item.isActive();
         });
 
     });
 
-    self.activeCategories = ko.computed(function () {
+    self.activeCategories = ko.deferredComputed(function () {
         var cats = ko.utils.arrayMap(self.activeItems(), function (item) {
             return item.menuItem().category();
         });
@@ -40,7 +32,7 @@ LT.Order = function (data) {
         });
     };
 
-    self.totalPrice = ko.computed(function () {
+    self.totalPrice = ko.deferredComputed(function () {
         var total = 0;
 
         ko.utils.arrayForEach(self.items(), function (item) {
@@ -84,6 +76,22 @@ LT.Order = function (data) {
         };
     };
 
+    self.initialize = function (data) {
+        data = data || {};
+
+        self.id(data.id || null);
+        self.clientId(data.client_id || LT.OrderRepository.generateClientId());
+        self.date(Date.parseExact(data.date, 'yyyy-MM-dd HH:mm:ss'));
+        data.items = data.items || [];
+        for (var i = 0; i < data.items.length; i++) {
+            self.items.pushUnique(LT.OrderItemRepository.create(data.items[i]));
+        }
+    };
+
+    self.update = self.initialize;
+
+    self.initialize(data);
+
 };
 
 
@@ -107,8 +115,9 @@ LT.OrderRepository = new (function () {
         });
         if (!object) {
             object = new LT.Order(data);
+            self.objects.push(object);
         }
-        self.objects.push(object);
+
         return object;
     };
 

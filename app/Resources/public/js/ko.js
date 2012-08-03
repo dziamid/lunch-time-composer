@@ -4,3 +4,7 @@ ko.observableArray['fn']['pushUnique'] = function (item) {
         this.push(item);
     }
 };
+
+ko.deferredComputed = function (computed) {
+    return ko.computed({read: computed, deferEvaluation: true});
+};
