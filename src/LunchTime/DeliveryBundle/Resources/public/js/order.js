@@ -1,5 +1,7 @@
+
 LT.Order = function (data) {
     var self = this;
+    self.update = LT.Order;
     data = data || {};
     self.id = ko.observable(data.id || null);
     var clientId = data.client_id || LT.OrderRepository.generateClientId();
@@ -96,5 +98,32 @@ LT.OrderRepository = new (function () {
     self.generateClientId = function () {
         self.lastId++;
         return self.lastId;
+    };
+
+    self.objects = ko.observableArray([]);
+    self.create = function (data) {
+        var object = ko.utils.arrayFirst(self.objects(), function (o) {
+            return ko.utils.unwrapObservable(o.id) == data.id;
+        });
+        if (!object) {
+            object = new LT.Order(data);
+        }
+        self.objects.push(object);
+        return object;
+    };
+
+
+    self.update = function (data) {
+        var object = ko.utils.arrayFirst(self.objects(), function (o) {
+            return ko.utils.unwrapObservable(o.clientId) == data.client_id;
+        });
+        //do we need to created orders if not found in repository?
+        if (!object) {
+            return;
+        }
+
+        object.update(data);
+
+        return object;
     };
 });

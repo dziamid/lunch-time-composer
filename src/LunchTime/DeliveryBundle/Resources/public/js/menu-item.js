@@ -1,4 +1,3 @@
-
 LT.MenuItem = function (data) {
     var self = this;
     data = data || {};
@@ -36,7 +35,9 @@ LT.MenuItemRepository = new (function () {
         }
         self.objects.push(object);
         return object;
-    }
+    };
+
+
 });
 
 

@@ -21,7 +21,7 @@ LT.viewModel = new (function (config) {
     self.orders = ko.observableArray([]);
     config.orders = config.orders || [];
     for (i = 0; i < config.orders.length; i++) {
-        self.orders.push(new LT.Order(config.orders[i]));
+        self.orders.push(LT.OrderRepository.create(config.orders[i]));
     }
 
     self.activeMenu = ko.observable(null);
@@ -40,7 +40,7 @@ LT.viewModel = new (function (config) {
         });
         if (!order) {
             var menuDate = menu.date().toString('yyyy-MM-dd HH:mm:ss');
-            order = new LT.Order({date: menuDate});
+            order = LT.OrderRepository.create({date: menuDate});
             self.orders.push(order);
         }
         self.activeOrder(order);
@@ -76,9 +76,9 @@ LT.viewModel = new (function (config) {
             dataType: 'json',
             success: function (data) {
                 if (data.success) {
-                    var orders = new LT.Order(data.orders);
-
-                    //self.activeOrder(order);
+                    ko.utils.arrayForEach(data.orders, function(orderData) {
+                        LT.OrderRepository.update(orderData);
+                    });
                 }
             },
             beforeSend: function () { btn.button('loading')},
