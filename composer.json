@@ -32,12 +32,11 @@
         "stof/doctrine-extensions-bundle":"dev-master",
         "sonata-project/admin-bundle":"dev-master",
         "sonata-project/doctrine-orm-admin-bundle":"dev-master",
-        "doctrine/doctrine-migrations-bundle":"dev-master",
-        "knplabs/knp-menu-bundle":"dev-master"
+        "doctrine/doctrine-migrations-bundle":"dev-master"
     },
     "require-dev": {
-        "behat/behat":"2.4.*@stable",
-        "behat/mink":"1.4.*@stable",
+        "behat/behat":"*",
+        "behat/mink":"*",
         "behat/mink-extension":"*",
         "behat/mink-goutte-driver":"*",
         "behat/mink-selenium2-driver": "*",
