@@ -41,6 +41,12 @@ class Item
     private $menu_item;
 
     /**
+     * @var integer $client_id Id of this entity that identifies itself on the client side
+     * @Serializer\Type("integer")
+     */
+    private $client_id;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -108,5 +114,21 @@ class Item
     public function getMenuItem()
     {
         return $this->menu_item;
+    }
+
+    /**
+     * @param int $client_id
+     */
+    public function setClientId($client_id)
+    {
+        $this->client_id = $client_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getClientId()
+    {
+        return $this->client_id;
     }
 }

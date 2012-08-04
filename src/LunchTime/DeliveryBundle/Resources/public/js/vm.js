@@ -12,7 +12,7 @@ LT.viewModel = new (function (config) {
         self.menus.push(new LT.Menu(config.menus[i]));
     }
 
-    self.findMenu = function(menuId) {
+    self.findMenu = function (menuId) {
         return ko.utils.arrayFirst(self.menus(), function (menu) {
             return ko.utils.unwrapObservable(menu.id) == menuId;
         });
@@ -26,7 +26,7 @@ LT.viewModel = new (function (config) {
 
     self.activeMenu = ko.observable(null);
     self.activeMenu.subscribe(function (menu) {
-        $.cookie('selected-menu-id', ko.utils.unwrapObservable(menu.id), { expires: 30*12 });
+        $.cookie('selected-menu-id', ko.utils.unwrapObservable(menu.id), { expires: 30 * 12 });
         //TODO: move activateMenu logic here
     });
     self.activeOrder = ko.observable(null);
@@ -75,14 +75,16 @@ LT.viewModel = new (function (config) {
             type: 'POST',
             dataType: 'json',
             success: function (data) {
-                if (data.success) {
-                    ko.utils.arrayForEach(data.orders, function(orderData) {
-                        LT.OrderRepository.update(orderData);
-                    });
-                }
+                data.orders && ko.utils.arrayForEach(data.orders, function (orderData) {
+                    LT.OrderRepository.createOrUpdate(orderData);
+                });
             },
-            beforeSend: function () { btn.button('loading')},
-            complete: function () { btn.button('reset')}
+            beforeSend: function () {
+                btn.button('loading')
+            },
+            complete: function () {
+                btn.button('reset')
+            }
         });
     };
 

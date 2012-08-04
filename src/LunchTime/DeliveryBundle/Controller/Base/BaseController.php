@@ -105,6 +105,7 @@ class BaseController extends Controller
         //TODO: check existance and handle errors
         $item = $itemData['id'] !== null ? $em->find('LTDeliveryBundle:Client\Order\Item', $itemData['id']) : new Order\Item();
         $item->setAmount($itemData['amount']);
+        $item->setClientId($itemData['client_id']);
 
         $menuItemData = $itemData['menu_item'];
 

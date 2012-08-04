@@ -51,7 +51,7 @@ LT.Order = function (data) {
         if (item) {
             item.addOne();
         } else {
-            item = new LT.OrderItem({menuItem: menuItem, amount: 1});
+            item = LT.OrderItemRepository.create({menuItem: menuItem, amount: 1});
             self.items.push(item);
         }
     };
@@ -83,8 +83,10 @@ LT.Order = function (data) {
         self.clientId(data.client_id || LT.OrderRepository.generateClientId());
         self.date(Date.parseExact(data.date, 'yyyy-MM-dd HH:mm:ss'));
         data.items = data.items || [];
+        //we need to created or update really, depending on whether client_id is null or not
         for (var i = 0; i < data.items.length; i++) {
-            self.items.pushUnique(LT.OrderItemRepository.create(data.items[i]));
+            var item = LT.OrderItemRepository.createOrUpdate(data.items[i]);
+            item && self.items.pushUnique(item);
         }
     };
 
@@ -101,6 +103,9 @@ LT.Order = function (data) {
  */
 LT.OrderRepository = new (function () {
     var self = this;
+
+    self.objects = ko.observableArray([]);
+
     self.lastId = 1;
 
     self.generateClientId = function () {
@@ -108,12 +113,26 @@ LT.OrderRepository = new (function () {
         return self.lastId;
     };
 
-    self.objects = ko.observableArray([]);
-    self.create = function (data) {
-        var object = ko.utils.arrayFirst(self.objects(), function (o) {
-            return ko.utils.unwrapObservable(o.id) == data.id;
+    /**
+     * Find object by propertyName that matches propertyValue
+     *
+     */
+    self.find = function (propertyName, propertyValue) {
+        return ko.utils.arrayFirst(self.objects(), function (o) {
+            return ko.utils.unwrapObservable(o[propertyName]) == propertyValue;
         });
-        if (!object) {
+    };
+
+    /**
+     * Creates a new entity and adds it to repository
+     *
+     * @param data
+     * @return LT.Order
+     */
+    self.create = function (data) {
+        var object, id;
+
+        if (!(id = data.client_id) || !(object = self.find('id', id))) {
             object = new LT.Order(data);
             self.objects.push(object);
         }
@@ -121,18 +140,24 @@ LT.OrderRepository = new (function () {
         return object;
     };
 
+    /**
+     * Creates or updates item with data depending on client_id property
+     *
+     * If client_id propery is valid, then entity is already in repository and needs to be updades,
+     * otherwise - entity is not yet in repository - so create it
+     *
+     * @param data array
+     */
+    self.createOrUpdate = function (data) {
+        var object, clientId;
 
-    self.update = function (data) {
-        var object = ko.utils.arrayFirst(self.objects(), function (o) {
-            return ko.utils.unwrapObservable(o.clientId) == data.client_id;
-        });
-        //do we need to created orders if not found in repository?
-        if (!object) {
-            return;
+        if ((clientId = data.client_id) && (object = self.find('clientId', clientId))) {
+            //entity exists
+            return object.update(data);
+        } else {
+            return self.create(data);
         }
-
-        object.update(data);
-
-        return object;
     };
+
+
 });
