@@ -31,14 +31,14 @@
         </div>
     </div>
 
-    <div class="span6">
+    <div id="active-order" class="span6">
         <div class="well lt-list" style="padding: 8px 0" data-bind="with: activeOrder">
             <ul class="nav nav-list">
                 <li class="nav-header">
                     {% trans with {'%date%': '<span data-bind="text: title"></span>'} %}Your order for %date%{% endtrans %}
                 </li>
                 <!-- ko foreach: activeCategories -->
-                    <li class="nav-header"><span data-bind="text: title"></span></li>
+                    <li class="nav-header lt-category"><span data-bind="text: title"></span></li>
                     <!-- ko foreach: $parent.getActiveItemsForCategory($data) -->
                     <li>
                         <a href="#">

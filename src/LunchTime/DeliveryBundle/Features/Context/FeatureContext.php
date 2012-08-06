@@ -4,7 +4,7 @@ namespace LunchTime\DeliveryBundle\Features\Context;
 
 use Symfony\Component\HttpKernel\KernelInterface;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
-use Behat\MinkExtension\Context\MinkContext;
+use Behat\MinkExtension\Context\MinkDictionary;
 
 use Behat\Behat\Context\BehatContext,
 Behat\Behat\Exception\PendingException;
@@ -12,9 +12,8 @@ use Behat\Gherkin\Node\PyStringNode,
 Behat\Gherkin\Node\TableNode;
 
 use Behat\Symfony2Extension\Context\KernelDictionary;
-
-use LunchTime\DeliveryBundle\Entity\Menu;
 use Doctrine\ORM\EntityManager;
+use Behat\Mink\Exception\ElementNotFoundException;
 
 //
 // Require 3rd-party libraries here:
@@ -26,9 +25,9 @@ use Doctrine\ORM\EntityManager;
 /**
  * Feature context.
  */
-class FeatureContext extends MinkContext //MinkContext if you want to test web
+class FeatureContext extends BehatContext
 {
-    use KernelDictionary;
+    use KernelDictionary, MinkDictionary, MenuDictionary, BackgroundDictionary, OrderDictionary;
 
     private $parameters;
 
@@ -43,90 +42,31 @@ class FeatureContext extends MinkContext //MinkContext if you want to test web
     }
 
     /**
-     * @Given /^I wait for menu to load$/
-     */
-    public function iWaitForMenuToLoad()
-    {
-        $this->getSession()->wait(2000, "$('#active-menu').children().length > 0");
-    }
-
-    /**
-     * @Given /^there are menu items:$/
-     */
-    public function thereAreMenuItems(TableNode $table)
-    {
-        $em = $this->getEntityManager();
-
-        $rows = $table->getHash();
-        foreach ($rows as $row) {
-            $category = $em->getRepository('LTDeliveryBundle:Menu\Category')->findOneBy(array(
-                'title' => trim($row['category']),
-            ));
-            if (false == $category) {
-                $category = new Menu\Category();
-                $category->setTitle($row['category']);
-                $em->persist($category);
-            }
-
-            $item = new Menu\Item();
-            $item->setTitle($row['title']);
-            $item->setPrice($row['price']);
-            $item->setCategory($category);
-            $em->persist($item);
-        }
-
-        $em->flush();
-    }
-
-    /**
-     * @Given /^there are menus:$/
-     */
-    public function thereAreMenus(TableNode $table)
-    {
-        $em = $this->getEntityManager();
-
-        $rows = $table->getHash();
-        foreach ($rows as $row) {
-            $menu = new Menu();
-            $menu->setDueDate(new \DateTime($row['date']));
-            $items = explode(',', $row['items']);
-            foreach ($items as $title) {
-                $item = $em->getRepository('LTDeliveryBundle:Menu\Item')->findOneBy(array(
-                    'title' => trim($title),
-                ));
-                $menu->addItem($item);
-            }
-            $em->persist($menu);
-        }
-
-        $em->flush();
-    }
-
-    /**
-     * @Given /^the database is clean$/
-     */
-    public function theDatabaseIsClean()
-    {
-        $em = $this->getEntityManager();
-        $menus = $em->getRepository('LTDeliveryBundle:Menu')->findAll();
-        foreach ($menus as $menu) {
-            $em->remove($menu);
-        }
-        $items = $em->getRepository('LTDeliveryBundle:Menu\Item')->findAll();
-        foreach ($items as $item) {
-            $em->remove($item);
-        }
-
-        $em->flush();
-
-    }
-
-    /**
      * @return EntityManager
      */
     protected function getEntityManager()
     {
         return $this->getContainer()->get('doctrine')->getEntityManager();
     }
+
+    /**
+     * Clicks on the first element that contains specified text.
+     *
+     * @When /^(?:|I )click on "(?P<link>(?:[^"]|\\")*)"$/
+     */
+    public function clickText($text)
+    {
+        //TODO: replace by any element
+        $element = $this->getSession()->getPage()->find('xpath', '//*[text()="'.$text.'"]');
+
+        if (null === $element) {
+            throw new ElementNotFoundException(
+                $this->getSession(), 'any', 'text', $text
+            );
+        }
+
+        $element->click();
+    }
+
 
 }
