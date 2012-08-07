@@ -1,12 +1,34 @@
 {% extends 'SonataAdminBundle::standard_layout.html.twig' %}
 
 {% block sonata_admin_content %}
+
+<table>
+    <tr>
+        <td>Order</td>
+        <td>Client</td>
+        {% for menuItem in menuItems %}
+        <td> {{ menuItem }}</td>
+        {% endfor %}
+    </tr>
+
 {% for order in orders %}
-    <div class="order">
-        <a href="{{ path('client_order_edit', {'id': order.id}) }}">#{{ order.id }}</a> -
-        <a href="{{ path('company_client_edit', {'id': order.client.id }) }}">#{{ order.client }}</a>
+    <tr>
+        <td class="order">
+            <a href="{{ path('client_order_edit', {'id': order.id}) }}">#{{ order.id }}</a>
+        </td>
+        <td class="client">
+            <a href="{{ path('company_client_edit', {'id': order.client.id }) }}">#{{ order.client }}</a>
+        </td>
+        {% for menuItem in menuItems %}
+        <td>
+            {% set orderItem = order.getItem(menuItem) %}
 
-    </div>
+            {% if (orderItem) %}
+                {{ orderItem.amount }}
+            {% endif %}
+        </td>
+        {% endfor %}
+    </tr>
 {% endfor %}
-
+</table>
 {% endblock %}

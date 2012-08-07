@@ -7,6 +7,9 @@ use JMS\SerializerBundle\Annotation as Serializer;
 use Doctrine\Common\Collections\ArrayCollection;
 use LunchTime\DeliveryBundle\Entity\Client;
 
+use LunchTime\DeliveryBundle\Entity\Menu;
+use LunchTime\Utils;
+
 /**
  * LunchTime\DeliveryBundle\Entity\Client\Order
  *
@@ -55,13 +58,12 @@ class Order
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
     }
-
 
     public function __construct()
     {
@@ -72,7 +74,7 @@ class Order
     {
         return (string)$this->id;
     }
-    
+
     /**
      * Add items
      *
@@ -142,5 +144,18 @@ class Order
     public function getCompany()
     {
         return $this->getClient()->getCompany();
+    }
+
+    /**
+     * Returns the first Order\Item that is related to given Menu\Item
+     *
+     * @param $menuItem Menu\Item
+     */
+    public function getItem(Menu\Item $menuItem)
+    {
+        return Utils::array_first($this->getItems()->toArray(), function ($item) use ($menuItem) {
+            /** @var $item Order\Item */
+            return $item->getMenuItem() == $menuItem;
+        });
     }
 }
