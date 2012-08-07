@@ -16,6 +16,7 @@ class ClientFixtures extends AbstractFixture implements FixtureInterface, Ordere
 
         $client->setName('Иван Демидович');
         $client->setCompany($this->getReference('company-taucraft'));
+        $this->setReference('client-1', $client);
         $manager->persist($client);
 
         $client->setName('Демид Владимирович');
@@ -32,7 +33,7 @@ class ClientFixtures extends AbstractFixture implements FixtureInterface, Ordere
 
     public function getOrder()
     {
-        return 7;
+        return 2;
     }
 
 }

@@ -18,7 +18,11 @@
         <parameter key="lt.backend.entity.company">LunchTime\DeliveryBundle\Entity\Company</parameter>
         <parameter key="lt.backend.admin.company">LunchTime\BackendBundle\Admin\CompanyAdmin</parameter>
 
+        <parameter key="lt.backend.entity.client.order">LunchTime\DeliveryBundle\Entity\Client\Order</parameter>
+        <parameter key="lt.backend.admin.client.order">LunchTime\BackendBundle\Admin\Client\OrderAdmin</parameter>
+
         <parameter key="lt.backend.menu.crud">SonataAdminBundle:CRUD</parameter>
+
 
     </parameters>
 
@@ -78,6 +82,16 @@
             </call>
         </service>
 
+        <service id="lt.backend.order" class="%lt.backend.admin.client.order%">
+            <tag name="sonata.admin" manager_type="orm" group="Client" label="All orders"/>
+            <argument/>
+            <argument>%lt.backend.entity.client.order%</argument>
+            <argument>%lt.backend.menu.crud%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>SonataAdminBundle</argument>
+            </call>
+        </service>
 
     </services>
 

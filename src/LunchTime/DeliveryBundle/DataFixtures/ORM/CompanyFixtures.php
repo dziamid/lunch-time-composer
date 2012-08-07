@@ -25,7 +25,7 @@ class CompanyFixtures extends AbstractFixture implements FixtureInterface, Order
 
     public function getOrder()
     {
-        return 6;
+        return 1;
     }
 
 }

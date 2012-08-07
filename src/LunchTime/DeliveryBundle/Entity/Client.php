@@ -66,6 +66,11 @@ class Client
      */
     private $company;
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * Get id
      *

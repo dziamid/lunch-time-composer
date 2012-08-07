@@ -50,7 +50,7 @@ class MenuCategoryFixtures extends AbstractFixture implements FixtureInterface, 
 
     public function getOrder()
     {
-        return 2;
+        return 1;
     }
 
 }

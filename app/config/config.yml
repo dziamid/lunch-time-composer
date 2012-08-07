@@ -130,8 +130,16 @@ sonata_admin:
     dashboard:
         blocks:
             # display a dashboard block
-            - { position: left, type: sonata.admin.block.admin_list }
-
-        groups:
-            Menu: ~
-            Client: ~
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                settings:
+                  groups: [Menu]
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                settings:
+                  groups: [Client]
+#        groups:
+#            Menu: ~
+#            Client: ~

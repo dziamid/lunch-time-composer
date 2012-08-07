@@ -30,6 +30,7 @@ class ItemRepository extends EntityRepository
             ->add('where', $qb->expr()->in('i.id', '?1'))
             ->setParameter('1', $ids);
 
-        return $qb->getQuery();
+        return $qb->getArrayResult();
     }
+
 }

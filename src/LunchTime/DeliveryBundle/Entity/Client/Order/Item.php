@@ -46,6 +46,10 @@ class Item
      */
     private $client_id;
 
+    public function __toString()
+    {
+        return (string)$this->getMenuItem();
+    }
     /**
      * Get id
      *

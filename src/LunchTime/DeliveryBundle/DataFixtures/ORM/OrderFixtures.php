@@ -15,6 +15,7 @@ class OrderFixtures extends AbstractFixture implements FixtureInterface, Ordered
         $order = new Order();
 
         $order->setDueDate($this->getReference('menu-1')->getDueDate());
+        $order->setClient($this->getReference('client-1'));
         $manager->persist($order);
 
         $manager->flush();

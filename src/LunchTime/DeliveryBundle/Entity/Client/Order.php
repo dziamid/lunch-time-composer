@@ -138,4 +138,9 @@ class Order
     {
         return $this->client;
     }
+
+    public function getCompany()
+    {
+        return $this->getClient()->getCompany();
+    }
 }
