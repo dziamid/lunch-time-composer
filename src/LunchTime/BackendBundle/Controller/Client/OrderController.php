@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\SecurityContext;
 
+use LunchTime\Utils;
+
 class OrderController extends Controller
 {
 
@@ -29,19 +31,10 @@ class OrderController extends Controller
             }
         }
 
-        $menuItems = array_filter($menuItems, function ($item) {
-            static $found = array();
-            $id = $item->getId();
-            if (!in_array($id, $found)) {
-                $found[] = $id;
-                return $item;
-            } else {
-                return false;
-            }
-        });
+        $menuCategories = $em->getRepository('LTDeliveryBundle:Menu\Category')->getListByItems($menuItems);
 
         return array(
-            'menuItems' => $menuItems,
+            'menuCategories' => $menuCategories,
             'orders'     => $orders,
             'admin_pool' => $this->get('sonata.admin.pool'),
         );

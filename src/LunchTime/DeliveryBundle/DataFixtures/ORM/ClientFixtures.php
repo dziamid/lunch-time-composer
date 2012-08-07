@@ -21,6 +21,7 @@ class ClientFixtures extends AbstractFixture implements FixtureInterface, Ordere
 
         $client->setName('Демид Владимирович');
         $client->setCompany($this->getReference('company-taucraft'));
+        $this->setReference('client-2', $client);
         $manager->persist($client);
 
         $client->setName('Кирилл Липский');

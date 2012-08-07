@@ -2,16 +2,25 @@
 
 {% block sonata_admin_content %}
 
-<table>
+<table class="table table-striped table-bordered">
+    <tr>
+        <td></td>
+        <td></td>
+        {% for menuCategory in menuCategories %}
+        <td colspan="{{ menuCategory.items | length }}"> {{ menuCategory }} </td>
+        {% endfor %}
+    </tr>
     <tr>
         <td>Order</td>
         <td>Client</td>
-        {% for menuItem in menuItems %}
+        {% for menuCategory in menuCategories %}
+        {% for menuItem in menuCategory.items %}
         <td> {{ menuItem }}</td>
+        {% endfor %}
         {% endfor %}
     </tr>
 
-{% for order in orders %}
+    {% for order in orders %}
     <tr>
         <td class="order">
             <a href="{{ path('client_order_edit', {'id': order.id}) }}">#{{ order.id }}</a>
@@ -19,16 +28,18 @@
         <td class="client">
             <a href="{{ path('company_client_edit', {'id': order.client.id }) }}">#{{ order.client }}</a>
         </td>
-        {% for menuItem in menuItems %}
+        {% for menuCategory in menuCategories %}
+        {% for menuItem in menuCategory.items %}
         <td>
             {% set orderItem = order.getItem(menuItem) %}
 
             {% if (orderItem) %}
-                {{ orderItem.amount }}
+            {{ orderItem.amount }}
             {% endif %}
         </td>
         {% endfor %}
+        {% endfor %}
     </tr>
-{% endfor %}
+    {% endfor %}
 </table>
 {% endblock %}

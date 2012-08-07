@@ -70,6 +70,7 @@ class MenuItemFixtures extends AbstractFixture implements FixtureInterface, Orde
             'category' => $salad,
         ));
         $items->add($item);
+        $this->addReference('salad-chiken', $item);
 
         //main
         $item = new Item();
@@ -79,6 +80,7 @@ class MenuItemFixtures extends AbstractFixture implements FixtureInterface, Orde
             'category' => $main,
         ));
         $items->add($item);
+        $this->addReference('main-beef', $item);
 
         $item = new Item();
         $item->fromArray(array(

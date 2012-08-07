@@ -20,4 +20,19 @@ class Utils
         }
         return false;
     }
+
+    public static function array_filter_unique(array $array, $callback)
+    {
+        $items = array();
+
+        foreach ($array as $item) {
+            //value that defines uniqueness
+            $value = $callback($item);
+            if (!isset($items[$value])) {
+                $items[$value] = $item;
+            }
+        }
+
+        return array_values($items);
+    }
 }

@@ -27,6 +27,29 @@ class OrderItemFixtures extends AbstractFixture implements FixtureInterface, Ord
         $item->setAmount(2);
         $manager->persist($item);
 
+        //ORDER 2
+
+
+        $order = $this->getReference('order-2');
+
+        $item = new Item();
+        $item->setOrder($order);
+        $item->setMenuItem($this->getReference('menu-item-salad'));
+        $item->setAmount(1);
+        $manager->persist($item);
+
+        $item = new Item();
+        $item->setOrder($order);
+        $item->setMenuItem($this->getReference('salad-chiken'));
+        $item->setAmount(1);
+        $manager->persist($item);
+
+        $item = new Item();
+        $item->setOrder($order);
+        $item->setMenuItem($this->getReference('main-beef'));
+        $item->setAmount(1);
+        $manager->persist($item);
+
         $manager->flush();
     }
 

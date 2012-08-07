@@ -14,4 +14,18 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
  */
 class CategoryRepository extends NestedTreeRepository
 {
+    public function getListByItems(array $menuItems)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $ids = array_map(function ($item) { return $item->getId(); }, $menuItems);
+
+        $qb->select('c, i')
+            ->innerJoin('c.items', 'i')
+            ->add('where', $qb->expr()->in('i.id', '?1'))
+            ->orderBy('c.title')
+            ->addOrderBy('i.title')
+            ->setParameter('1', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
 }
