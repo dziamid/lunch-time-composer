@@ -15,7 +15,7 @@ security:
             memory:
                 users:
                     #user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    backend: { password: ubuntu, roles: [ 'ROLE_ADMIN' ]}
+                    backend: { password: ubuntu, roles: [ ROLE_ADMIN, ROLE_SONATA_ADMIN ]}
 
     firewalls:
         dev:
