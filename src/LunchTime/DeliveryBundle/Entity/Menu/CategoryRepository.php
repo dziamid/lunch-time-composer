@@ -18,7 +18,9 @@ class CategoryRepository extends NestedTreeRepository
     {
         $qb = $this->createQueryBuilder('c');
         $ids = array_map(function ($item) { return $item->getId(); }, $menuItems);
-
+        if (empty($ids)) {
+            return false;
+        }
         $qb->select('c, i')
             ->innerJoin('c.items', 'i')
             ->add('where', $qb->expr()->in('i.id', '?1'))

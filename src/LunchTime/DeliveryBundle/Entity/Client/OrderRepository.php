@@ -12,14 +12,38 @@ use Doctrine\ORM\EntityRepository;
  */
 class OrderRepository extends EntityRepository
 {
-    public function getListWithItemsQuery()
+
+    protected function getQueryBuilderWithRelations()
     {
         $qb = $this->createQueryBuilder('o')
-            ->select('o, i, m')
+            ->select('o, i, m, c')
             ->leftJoin('o.items', 'i')
             ->innerJoin('i.menu_item', 'm')
+            ->innerJoin('o.client', 'c')
             ->orderBy('o.due_date');
 
+        return $qb;
+    }
+
+    public function getListWithItemsQuery()
+    {
+        $qb = $this->getQueryBuilderWithRelations();
+
         return $qb->getQuery();
+    }
+
+    /**
+     * Return all orders for given date
+     *
+     * @param $date integer Valid timestamp
+     */
+    public function getListForDate(\DateTime $date)
+    {
+        $qb = $this->getQueryBuilderWithRelations();
+
+        $qb->add('where', $qb->expr()->eq('o.due_date', '?1'))
+            ->setParameter('1', $date);
+
+        return $qb->getQuery()->getResult();
     }
 }

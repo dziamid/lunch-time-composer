@@ -29,4 +29,17 @@ class MenuRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    public function getActiveMenusList()
+    {
+        $date = new \DateTime();
+        $date->setTime(0, 0, 0);
+        $qb = $this->createQueryBuilder('m')
+            ->select('m')
+            ->orderBy('m.due_date')
+            ->where('m.due_date > ?1')
+            ->setParameter('1', $date);
+
+        return $qb->getQuery()->getArrayResult();
+    }
 }

@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\SecurityContext;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use LunchTime\Utils;
 
@@ -14,13 +15,27 @@ class OrderController extends Controller
 {
 
     /**
-     * @Template
-     * @Route("/client/order/group-list", name="order_group_list")
+     * @Template("LTBackendBundle:Client\Order:groupList.html.twig")
+     * @Route("/client/order/list-today", name="order_group_list_today")
      */
-    public function groupListAction()
+    public function groupListTodayAction()
+    {
+        $today = new \DateTime();
+        $params = $this->groupListAction($today);
+
+        return $params;
+    }
+
+    /**
+     * @Template
+     * @ParamConverter("date", class="DateTime")
+     * @Route("/client/order/list/{date}", name="order_group_list_bydate")
+     */
+    public function groupListAction(\DateTime $date)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $orders = $em->getRepository('LTDeliveryBundle:Client\Order')->findAll();
+        $menus = $em->getRepository('LTDeliveryBundle:Menu')->getActiveMenusList();
+        $orders = $em->getRepository('LTDeliveryBundle:Client\Order')->getListForDate($date);
 
         $menuItems = array();
         $orderItems = array();
@@ -34,10 +49,13 @@ class OrderController extends Controller
         $menuCategories = $em->getRepository('LTDeliveryBundle:Menu\Category')->getListByItems($menuItems);
 
         return array(
+            'date' => $date,
             'menuCategories' => $menuCategories,
             'orders'     => $orders,
             'admin_pool' => $this->get('sonata.admin.pool'),
+            'menus' => $menus,
         );
     }
+
 
 }
