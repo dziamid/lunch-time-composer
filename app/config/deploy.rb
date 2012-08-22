@@ -1,6 +1,6 @@
 set :application, "LunchTime"
 set :domain,      "dream"
-set :deploy_to,   "/var/www/dev"
+set :deploy_to,   "/var/www/lunchtime"
 set :app_path,    "app"
 set :web_path,    "web"
 set :repository,  "https://github.com/dziamid/lunch-time-composer.git"
