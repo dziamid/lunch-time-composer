@@ -47,3 +47,13 @@ Feature: menu
     Then I should see "Eggs" in the order
     And I should see only one section in the order
 
+  @javascript @order
+  Scenario: Customer can save his order
+    Given I am on "/client/kirill"
+    And I have chosen "Eggs, Meat"
+    When I press "Сохранить заказы"
+    And I wait for orders to save
+    And I reload the page
+    Then I should see "Eggs" in the order
+
+

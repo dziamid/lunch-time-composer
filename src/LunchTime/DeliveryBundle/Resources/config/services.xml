@@ -6,15 +6,12 @@
 
     <parameters>
         <parameter key="form.type_extension.csrf.enabled">false</parameter>
+        <parameter key="lt_delivery.converter.array.class">LunchTime\DeliveryBundle\Request\ParamConverter\ArrayParamConverter</parameter>
     </parameters>
-    <!--
 
     <services>
-        <service id="lt_delivery.example" class="%lt_delivery.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="lt_delivery.converter.array" class="%lt_delivery.converter.array.class%">
+            <tag name="request.param_converter" converter="array" />
         </service>
     </services>
-    -->
 </container>

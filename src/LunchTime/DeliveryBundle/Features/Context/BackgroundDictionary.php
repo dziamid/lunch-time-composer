@@ -70,7 +70,7 @@ trait BackgroundDictionary
     public function theDatabaseIsClean()
     {
         $em = $this->getEntityManager();
-        $repositories = array('Menu', 'Menu\Item', 'Client', 'Company');
+        $repositories = array('Client\Order\Item', 'Client\Order', 'Menu', 'Menu\Item', 'Client', 'Company');
         foreach ($repositories as $repoName) {
             $objects = $em->getRepository('LTDeliveryBundle:'. $repoName)->findAll();
             foreach ($objects as $object) {

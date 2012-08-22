@@ -14,7 +14,7 @@ Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelDictionary;
 use Doctrine\ORM\EntityManager;
 use Behat\Mink\Exception\ElementNotFoundException;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 //
 // Require 3rd-party libraries here:
 //
@@ -56,7 +56,6 @@ class FeatureContext extends BehatContext
      */
     public function clickText($text)
     {
-        //TODO: replace by any element
         $element = $this->getSession()->getPage()->find('xpath', '//*[text()="'.$text.'"]');
 
         if (null === $element) {
@@ -69,4 +68,24 @@ class FeatureContext extends BehatContext
     }
 
 
+
+
+    /**
+     * Add one or many menu items to order
+     * //TODO: add param converter to convert comma separated string to array
+     * @ParamConverter("titles", class="array")
+     * @Given /^I have chosen "([^"]*)"$/
+     */
+    public function iHaveChosen($titles)
+    {
+        $titles = 1;
+    }
+
+    /**
+     * @Given /^I wait for orders to save$/
+     */
+    public function iWaitForOrdersToSave()
+    {
+        throw new PendingException();
+    }
 }
