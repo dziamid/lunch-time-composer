@@ -42,15 +42,15 @@ Feature: menu
     adding two items from the same category results in only one category in the order
     Given I am on "/client/kirill"
     And I wait for menu to load
-    When I click on "Eggs"
-    And I click on "Meat"
+    When I select "Eggs" in active menu
+    And I select "Meat" in active menu
     Then I should see "Eggs" in the order
     And I should see only one section in the order
 
   @javascript @order
   Scenario: Customer can save his order
     Given I am on "/client/kirill"
-    And I have chosen "Eggs, Meat"
+    And I have selected "Eggs, Meat" in active menu
     When I press "Сохранить заказы"
     And I wait for orders to save
     And I reload the page

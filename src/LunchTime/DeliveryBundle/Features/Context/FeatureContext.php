@@ -15,6 +15,7 @@ use Behat\Symfony2Extension\Context\KernelDictionary;
 use Doctrine\ORM\EntityManager;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 //
 // Require 3rd-party libraries here:
 //
@@ -54,9 +55,13 @@ class FeatureContext extends BehatContext
      *
      * @When /^(?:|I )click on "(?P<link>(?:[^"]|\\")*)"$/
      */
-    public function clickText($text)
+    public function clickText($text, $parent = null)
     {
-        $element = $this->getSession()->getPage()->find('xpath', '//*[text()="'.$text.'"]');
+        if (null === $parent) {
+            $parent = $this->getSession()->getPage();
+        }
+
+        $element = $parent->find('xpath', '//*[text()="'.$text.'"]');
 
         if (null === $element) {
             throw new ElementNotFoundException(
@@ -68,24 +73,9 @@ class FeatureContext extends BehatContext
     }
 
 
-
-
-    /**
-     * Add one or many menu items to order
-     * //TODO: add param converter to convert comma separated string to array
-     * @ParamConverter("titles", class="array")
-     * @Given /^I have chosen "([^"]*)"$/
-     */
-    public function iHaveChosen($titles)
+    protected static function commaSeparatedArray($value)
     {
-        $titles = 1;
+        return array_map('trim', explode(",", $value));
     }
 
-    /**
-     * @Given /^I wait for orders to save$/
-     */
-    public function iWaitForOrdersToSave()
-    {
-        throw new PendingException();
-    }
 }

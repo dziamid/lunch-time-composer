@@ -38,4 +38,13 @@ trait OrderDictionary
         return $this->orderCategorySelector;
     }
 
+    /**
+     * @Given /^I wait for orders to save$/
+     */
+    public function waitForAjax()
+    {
+        //todo: add condition when button label is not "Loading..."
+        $this->getSession()->wait(5000, "window.__ajaxStatus !== 'in-flight'");
+    }
+
 }

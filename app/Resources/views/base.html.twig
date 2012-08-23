@@ -37,6 +37,7 @@
         var LT = {};
         window.LT = LT;
         LT.config = {};
+
     </script>
     {% endblock %}
 
@@ -50,7 +51,24 @@
      %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (window.__ajaxStatus !== undefined) {
+                return;
+            }
+            window.__ajaxStatus = 'none';
 
+            $('body').ajaxStop(function() {
+              window.__ajaxStatus = 'idle';
+              console.log('idle');
+            });
+
+            $('body').ajaxStart(function() {
+              window.__ajaxStatus = 'in-flight';
+              console.log('in-flight');
+            });
+        });
+    </script>
 {% endblock %}
 
 </body>
