@@ -61,7 +61,7 @@ class Item
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -81,13 +81,12 @@ class Item
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
         return $this->title;
     }
-
 
     /**
      * Set price
@@ -102,7 +101,7 @@ class Item
     /**
      * Get price
      *
-     * @return float 
+     * @return float
      */
     public function getPrice()
     {
@@ -142,6 +141,35 @@ class Item
     public function getMenus()
     {
         return $this->menus;
+    }
+
+    /**
+     * Get all order items that are related to this menu item in given orders
+     *
+     * @param array $orders
+     */
+    public function getOrderItems(array $orders)
+    {
+        $selectedItems = array();
+        foreach ($orders as $order) {
+            /** @var \LunchTime\DeliveryBundle\Entity\Client\Order $order */
+            foreach ($order->getItems() as $item) {
+                /** @var \LunchTime\DeliveryBundle\Entity\Client\Order\Item $item */
+                if ($item->getMenuItem() == $this) {
+                    $selectedItems[] = $item;
+                }
+
+            }
+        }
+
+        return $selectedItems;
+    }
+
+    public function getOrderItemsAmount(array $orders)
+    {
+        $items = $this->getOrderItems($orders);
+
+        return array_sum(array_map(function($item) { return $item->getAmount(); }, $items));
     }
 
 }

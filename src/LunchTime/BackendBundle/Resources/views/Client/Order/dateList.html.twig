@@ -48,5 +48,18 @@
         {% endfor %}
     </tr>
     {% endfor %}
+
+    <tr>
+        <td></td>
+        <td></td>
+
+        {% for menuCategory in menuCategories %}
+        {% for menuItem in menuCategory.items %}
+        <td>
+            {{ menuItem.getOrderItemsAmount(orders) }}
+        </td>
+        {% endfor %}
+        {% endfor %}
+    </tr>
 </table>
 {% endblock %}

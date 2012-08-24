@@ -15,13 +15,13 @@ class OrderController extends Controller
 {
 
     /**
-     * @Template("LTBackendBundle:Client\Order:groupList.html.twig")
+     * @Template("LTBackendBundle:Client\Order:dateList.html.twig")
      * @Route("/client/order/list-today", name="order_group_list_today")
      */
-    public function groupListTodayAction()
+    public function todayListAction()
     {
         $today = new \DateTime();
-        $params = $this->groupListAction($today);
+        $params = $this->dateListAction($today);
 
         return $params;
     }
@@ -31,9 +31,10 @@ class OrderController extends Controller
      * @ParamConverter("date", class="DateTime")
      * @Route("/client/order/list/{date}", name="order_group_list_bydate")
      */
-    public function groupListAction(\DateTime $date)
+    public function dateListAction(\DateTime $date)
     {
         $em = $this->getDoctrine()->getEntityManager();
+        /** @var $menus \LunchTime\DeliveryBundle\Entity\MenuRepository */
         $menus = $em->getRepository('LTDeliveryBundle:Menu')->getActiveMenusList();
         $orders = $em->getRepository('LTDeliveryBundle:Client\Order')->getListForDate($date);
 
@@ -51,6 +52,7 @@ class OrderController extends Controller
         return array(
             'date' => $date,
             'menuCategories' => $menuCategories,
+            'menuItems' => $menuItems,
             'orders'     => $orders,
             'admin_pool' => $this->get('sonata.admin.pool'),
             'menus' => $menus,

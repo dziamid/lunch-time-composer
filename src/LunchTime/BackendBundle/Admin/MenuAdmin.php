@@ -50,4 +50,12 @@ class MenuAdmin extends Admin
             ->end();
     }
 
+    public function getNewInstance()
+    {
+        $object = parent::getNewInstance();
+        $object->setDueDate(new \Datetime());
+
+        return $object;
+    }
+
 }
