@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use LunchTime\DeliveryBundle\Entity\Menu\Item;
 
 class ItemAdmin extends Admin
 {
@@ -20,6 +21,9 @@ class ItemAdmin extends Admin
             ->add('title')
             ->add('price')
             ->add('category')
+            ->add('box_type', 'choice', array(
+                'choices' => Item::getBoxes(),
+            ))
         ;
     }
 
@@ -29,8 +33,7 @@ class ItemAdmin extends Admin
             ->addIdentifier('id')
             ->add('title')
             ->add('price')
-            ->add('category')
-        ;
+            ->add('category');
 
     }
 

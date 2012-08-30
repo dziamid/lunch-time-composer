@@ -16,6 +16,11 @@ use LunchTime\DeliveryBundle\Entity\Menu;
  */
 class Item
 {
+    const BOX_MAIN = 'main';
+    const BOX_SALAD = 'salad';
+    const BOX_SOUP = 'soup';
+    const BOX_PIZZA = 'pizza';
+
     /**
      * @var integer $id
      * @Serializer\Type("integer")
@@ -52,6 +57,20 @@ class Item
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $category;
+
+    /**
+     * @var bool $is_box
+     *
+     * @ORM\Column(name="is_box", type="boolean")
+     */
+    private $is_box = false;
+
+    /**
+     * @var string $box_type
+     *
+     * @ORM\Column(name="box_type", type="string", length=255)
+     */
+    private $box_type = 'main';
 
     public function __toString()
     {
@@ -170,6 +189,48 @@ class Item
         $items = $this->getOrderItems($orders);
 
         return array_sum(array_map(function($item) { return $item->getAmount(); }, $items));
+    }
+
+    /**
+     * @param string $box_type
+     */
+    public function setBoxType($box_type)
+    {
+        $this->box_type = $box_type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBoxType()
+    {
+        return $this->box_type;
+    }
+
+    /**
+     * @param boolean $is_box
+     */
+    public function setIsBox($is_box)
+    {
+        $this->is_box = $is_box;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsBox()
+    {
+        return $this->is_box;
+    }
+
+    public static function getBoxes()
+    {
+        return array(
+            self::BOX_MAIN => "Box for any meal",
+            self::BOX_PIZZA => "Box for pizza",
+            self::BOX_SALAD => "Box for salad",
+            self::BOX_SOUP => "Box for soup",
+        );
     }
 
 }
