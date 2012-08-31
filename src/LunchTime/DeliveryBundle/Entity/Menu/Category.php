@@ -82,6 +82,13 @@ class Category
      */
     private $children;
 
+    /**
+     * @var string $box_type
+     *
+     * @ORM\Column(name="box_type", type="string", length=255)
+     */
+    private $box_type = Item::BOX_MAIN;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -196,5 +203,21 @@ class Category
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * @param string $box_type
+     */
+    public function setBoxType($box_type)
+    {
+        $this->box_type = $box_type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBoxType()
+    {
+        return $this->box_type;
     }
 }

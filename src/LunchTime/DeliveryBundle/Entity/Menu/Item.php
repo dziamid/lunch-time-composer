@@ -70,7 +70,9 @@ class Item
      *
      * @ORM\Column(name="box_type", type="string", length=255)
      */
-    private $box_type = 'main';
+    private $box_type = self::BOX_MAIN;
+
+
 
     public function __toString()
     {
@@ -204,7 +206,7 @@ class Item
      */
     public function getBoxType()
     {
-        return $this->box_type;
+        return $this->box_type ?: $this->getCategory()->getBoxType();
     }
 
     /**

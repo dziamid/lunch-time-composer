@@ -3,6 +3,7 @@
 namespace LunchTime\DeliveryBundle\Entity\Client\Order;
 
 use Doctrine\ORM\EntityRepository;
+use LunchTime\DeliveryBundle\Entity\Menu\Item;
 
 /**
  * ItemRepository
@@ -32,5 +33,7 @@ class ItemRepository extends EntityRepository
 
         return $qb->getArrayResult();
     }
+
+
 
 }

@@ -3,6 +3,8 @@
 namespace LunchTime\DeliveryBundle\Entity\Menu;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+
 
 /**
  * ItemRepository
@@ -18,5 +20,24 @@ class ItemRepository extends EntityRepository
             ->select('i');
 
         return $qb->getQuery();
+    }
+
+    public function addContainerQuery($qb)
+    {
+        /** @var $qb \Doctrine\ORM\QueryBuilder */
+        $alias = current($qb->getRootAliases());
+        $qb->andWhere($alias.".is_box = true");
+
+        return $qb;
+    }
+
+    public function getAvailableBoxes()
+    {
+        $existing = array_flip(array_map(function ($item) {
+            return $item->getBoxType();
+        }, $this->findBy(array('is_box' => true))));
+        $all = Item::getBoxes();
+
+        return array_diff_key($all, $existing);
     }
 }
